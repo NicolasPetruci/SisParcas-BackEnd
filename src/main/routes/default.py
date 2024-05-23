@@ -4,4 +4,4 @@ blueprint = Blueprint("blueprint_default", __name__)
 
 @blueprint.route("/")
 def default():
-    return jsonify({"response": "OK"})
+    return jsonify({"data": "OK"})
