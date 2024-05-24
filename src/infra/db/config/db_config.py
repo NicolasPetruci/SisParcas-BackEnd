@@ -5,10 +5,10 @@ from decouple import config
 class DBConnectionHandler:
     
     def __init__(self)->None:
-        self.conn_string = "mariadb+mariadbconnector://root:@127.0.0.1:3306/sisparcas"
+        self.conn_string = "postgresql://postgres:123@localhost:5432/sisparcas"
         self.session = None
     
-    def get_engine(self)->Engine:   
+    def get_engine(self):   
         engine = create_engine(self.conn_string)
         return engine
     

@@ -1,7 +1,7 @@
 
 class Usuario():
 
-    def __init__(self, id: int =None, nome: str=None):
+    def __init__(self, id: int, nome: str) -> None:
         self.__id = id
         self.__nome = nome
     
