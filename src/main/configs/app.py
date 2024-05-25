@@ -11,6 +11,7 @@ def register_errors(app: Flask):
 def register_blueprints(app: Flask):
     routes: tuple = (
         "default",
+        "cargo_routes"
     )
     for blueprint in routes:
         module = import_module("src.main.routes.{}".format(blueprint))

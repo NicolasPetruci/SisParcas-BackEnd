@@ -1,0 +1,1 @@
+from .cadastrar import cadastrar_cargo_composer
