@@ -21,7 +21,10 @@ class CargoUseCases(CargoUseCasesInterface):
     @classmethod
     def cadastrar(self, cargo: Cargo)->Dict:
         novo_cargo: Cargo = Cargo(None, cargo.descricao)
-        return self.__repository.insert(novo_cargo).to_json()
+        return {
+            "cargo": self.__repository.insert(novo_cargo).to_json(),
+            "message": "Usuario cadastrado com sucesso.",
+        }
     
 
     @classmethod
@@ -34,11 +37,17 @@ class CargoUseCases(CargoUseCasesInterface):
         cargo_atualizado = self.__repository.update(cargo)
         if cargo_atualizado is None:
             raise HttpError(HttpError.error_404("Cargo não encontrado."))
-        return cargo_atualizado.to_json()
+        return {
+            "cargo": cargo_atualizado.to_json(),
+            "message": "Usuario cadastrado com sucesso.",
+        }
     
     @classmethod
     def excluir(self, id: int) -> Dict: 
         cargo_excluido = self.__repository.delete_by_id(id)
         if cargo_excluido is None:
             raise HttpError(HttpError.error_404("Cargo não encontrado."))
-        return cargo_excluido.to_json()
+        return {
+            "cargo": cargo_excluido.to_json(),
+            "message": "Usuario cadastrado com sucesso.",
+        }
