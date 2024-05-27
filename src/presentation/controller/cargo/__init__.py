@@ -1,2 +1,0 @@
-from .cadastrar import CadastrarCargoController
-from .buscar import BuscarCargosController

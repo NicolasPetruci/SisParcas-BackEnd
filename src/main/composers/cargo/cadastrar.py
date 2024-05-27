@@ -1,10 +1,10 @@
 from src.infra.db.repositories import CargoRepository
-from src.data.use_cases.cargo import CadastrarCargo
-from src.presentation.controller.cargo import CadastrarCargoController
+from src.data.use_cases import CargoUseCases
+from src.presentation.controller import CargoController
 
 def cadastrar_cargo_composer():
     repository = CargoRepository()
-    use_case = CadastrarCargo(repository)
-    controller = CadastrarCargoController(use_case)
+    use_case = CargoUseCases(repository)
+    controller = CargoController(use_case)
 
-    return controller.handle
+    return controller.cadastrar_cargo

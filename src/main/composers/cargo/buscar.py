@@ -1,10 +1,10 @@
-from src.data.use_cases.cargo import BuscarCargos
-from src.presentation.controller.cargo import BuscarCargosController
+from src.data.use_cases import CargoUseCases
 from src.infra.db.repositories import CargoRepository
+from src.presentation.controller import CargoController
 
 def buscar_cargos_composer():
     repository = CargoRepository()
-    use_case = BuscarCargos(repository)
-    controller = BuscarCargosController(use_case)
+    use_case = CargoUseCases(repository)
+    controller = CargoController(use_case)
 
-    return controller.handle
+    return controller.buscar_cargos
