@@ -15,16 +15,30 @@ class CargoUseCases(CargoUseCasesInterface):
     def buscar_cargo_por_id(self, id: int) -> Dict:
         cargo = self.__repository.find_by_id(id)
         if cargo is None:
-            raise HttpError(HttpError.error_404("Usuário não encontrado!"))
+            raise HttpError(HttpError.error_404("Cargo não encontrado."))
         return cargo.to_json()
 
     @classmethod
     def cadastrar(self, cargo: Cargo)->Dict:
-        cargoInserir: Cargo = Cargo(None, cargo.descricao)
-        return self.__repository.insert(cargoInserir).to_json()
+        novo_cargo: Cargo = Cargo(None, cargo.descricao)
+        return self.__repository.insert(novo_cargo).to_json()
     
 
     @classmethod
     def buscar_cargos(self) -> List[Dict]:
         cargos: List[Cargo] = self.__repository.find_all()
         return list(c.to_json() for c in cargos) 
+    
+    @classmethod
+    def atualizar(self, cargo: Cargo) -> Dict:
+        cargo_atualizado = self.__repository.update(cargo)
+        if cargo_atualizado is None:
+            raise HttpError(HttpError.error_404("Cargo não encontrado."))
+        return cargo_atualizado.to_json()
+    
+    @classmethod
+    def excluir(self, id: int) -> Dict: 
+        cargo_excluido = self.__repository.delete_by_id(id)
+        if cargo_excluido is None:
+            raise HttpError(HttpError.error_404("Cargo não encontrado."))
+        return cargo_excluido.to_json()

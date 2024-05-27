@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict
+from src.domain.models import Cargo
 
 class CargoUseCasesInterface(ABC):
 
@@ -11,3 +12,9 @@ class CargoUseCasesInterface(ABC):
 
     @abstractmethod
     def cadastrar(self, cargo) -> Dict: pass
+
+    @abstractmethod
+    def atualizar(self, cargo) -> Dict: pass
+    
+    @abstractmethod
+    def excluir(self, id: int) -> Dict: pass
