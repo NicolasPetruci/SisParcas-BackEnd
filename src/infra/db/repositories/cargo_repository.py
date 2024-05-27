@@ -37,7 +37,21 @@ class CargoRepository(CargoRepositoryInterface):
                 raise exception
 
     @classmethod
-    def delete_by_id(cls, id) -> Cargo: pass
+    def delete_by_id(cls, id: int) -> Cargo: pass
 
     @classmethod
-    def find_by_id(cls, id) -> Cargo: pass
+    def find_by_id(cls, id: int) -> Cargo:
+        with DBConnectionHandler() as database:
+            try:
+                cargo_entity = (
+                    database.session.get(CargoEntity, id)
+                )
+                if cargo_entity is None:
+                    return None
+                return Cargo(cargo_entity.id_cargo, cargo_entity.descricao)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
+
+    @classmethod
+    def update(cls, cargo: Cargo) -> Cargo: pass
