@@ -10,12 +10,12 @@ class CargoRepository(CargoRepositoryInterface):
     def insert(cls, cargo: Cargo) -> Cargo:
         with DBConnectionHandler() as database:
             try: 
-                novo_cargo = CargoEntity(
+                entity = CargoEntity(
                     descricao = cargo.descricao
                 )
-                database.session.add(novo_cargo)
+                database.session.add(entity)
                 database.session.commit()
-                return Cargo(novo_cargo.id, novo_cargo.descricao)
+                return Cargo(entity.id, entity.descricao)
             except Exception as exception:
                 database.session.rollback()
                 raise exception
@@ -37,7 +37,16 @@ class CargoRepository(CargoRepositoryInterface):
                 raise exception
 
     @classmethod
-    def delete_by_id(cls, id: int) -> Cargo: pass
+    def delete_by_id(cls, id: int) -> Cargo:
+        with DBConnectionHandler() as database:
+            try:
+                entity = database.session.get(CargoEntity, id)
+                database.session.delete(entity)
+                database.session.commit()
+                return Cargo(entity.id, entity.descricao)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
 
     @classmethod
     def find_by_id(cls, id: int) -> Cargo:
@@ -54,4 +63,13 @@ class CargoRepository(CargoRepositoryInterface):
                 raise exception
 
     @classmethod
-    def update(cls, cargo: Cargo) -> Cargo: pass
+    def update(cls, cargo: Cargo) -> Cargo:
+        with DBConnectionHandler() as database:
+            try:
+                entity = database.session.get(CargoEntity, cargo.id)
+                entity.descricao = cargo.descricao
+                database.session.commit()
+                return Cargo(entity.id, entity.descricao)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
