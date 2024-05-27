@@ -1,7 +1,11 @@
 from flask import Blueprint, jsonify, request
 
 from src.main.adapters import request_adapter
-from src.main.composers.cargo import cadastrar_cargo_composer, buscar_cargos_composer, buscar_cargo_por_id_composer
+from src.main.composers.cargo import cadastrar_cargo_composer,\
+                                     buscar_cargos_composer,\
+                                     buscar_cargo_por_id_composer,\
+                                     atualizar_cargo_composer, \
+                                     excluir_cargo_composer
 
 from src.errors import handle_errors
 
@@ -29,4 +33,25 @@ def buscar_cargos():
     except Exception as exception:
         http_response = handle_errors(exception)
         
+    return jsonify(http_response.body), http_response.status_code
+
+@blueprint.route("/cargo/atualizar", methods=["PUT"])
+def atualizar_cargo():
+    http_response = None
+
+    try:
+        http_response = request_adapter(request, atualizar_cargo_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code
+
+@blueprint.route("/cargo/excluir", methods=["DELETE"])
+def excluir_cargo():
+    http_response = None
+    try:
+        http_response = request_adapter(request, excluir_cargo_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
     return jsonify(http_response.body), http_response.status_code
