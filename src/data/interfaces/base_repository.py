@@ -16,3 +16,6 @@ class BaseRepository(ABC, Generic[T]):
 
     @abstractmethod
     def delete_by_id(self, id: int) -> T: pass
+
+    @abstractmethod
+    def update(self, obj: T) -> T: pass 
