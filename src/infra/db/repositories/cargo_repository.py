@@ -41,6 +41,8 @@ class CargoRepository(CargoRepositoryInterface):
         with DBConnectionHandler() as database:
             try:
                 entity = database.session.get(CargoEntity, id)
+                if entity is None:
+                    return None
                 database.session.delete(entity)
                 database.session.commit()
                 return Cargo(entity.id, entity.descricao)
@@ -67,6 +69,8 @@ class CargoRepository(CargoRepositoryInterface):
         with DBConnectionHandler() as database:
             try:
                 entity = database.session.get(CargoEntity, cargo.id)
+                if entity is None:
+                    return None
                 entity.descricao = cargo.descricao
                 database.session.commit()
                 return Cargo(entity.id, entity.descricao)
