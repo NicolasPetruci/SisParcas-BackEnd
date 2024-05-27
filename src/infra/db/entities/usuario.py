@@ -2,7 +2,7 @@ from src.infra.db.config import Base
 from sqlalchemy import Column, Integer, String, Date, ForeignKey
 from sqlalchemy.orm import relationship
 
-class Usuario(Base):
+class UsuarioEntity(Base):
 
     __tablename__ = "usuario"
 
@@ -12,6 +12,6 @@ class Usuario(Base):
     senha = Column(String)
     aniversario = Column(Date)
 
-    #id_cargo = Column(Integer, ForeignKey("cargo.id_cargo"))
-    #cargo = relationship("Cargo", back_populates="cargo")
+    id_cargo = Column(Integer, ForeignKey("cargo.id_cargo"))
+    cargo = relationship("CargoEntity", back_populates="usuarios")
   
