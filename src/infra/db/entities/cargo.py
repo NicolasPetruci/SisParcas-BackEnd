@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 class CargoEntity(Base):
     __tablename__ = "cargo"
 
-    id_cargo = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     descricao = Column(String)
 
     usuarios = relationship("UsuarioEntity", back_populates="cargo")

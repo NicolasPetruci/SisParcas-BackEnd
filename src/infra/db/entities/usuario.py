@@ -6,12 +6,12 @@ class UsuarioEntity(Base):
 
     __tablename__ = "usuario"
 
-    id_usuario = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     nome = Column(String)
     telefone = Column(String)
     senha = Column(String)
     aniversario = Column(Date)
 
-    id_cargo = Column(Integer, ForeignKey("cargo.id_cargo"))
+    id_cargo = Column(Integer, ForeignKey("cargo.id"))
     cargo = relationship("CargoEntity", back_populates="usuarios")
   

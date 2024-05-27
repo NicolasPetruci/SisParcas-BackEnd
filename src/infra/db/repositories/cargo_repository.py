@@ -15,7 +15,7 @@ class CargoRepository(CargoRepositoryInterface):
                 )
                 database.session.add(novo_cargo)
                 database.session.commit()
-                return Cargo(novo_cargo.id_cargo, novo_cargo.descricao)
+                return Cargo(novo_cargo.id, novo_cargo.descricao)
             except Exception as exception:
                 database.session.rollback()
                 raise exception
@@ -25,7 +25,7 @@ class CargoRepository(CargoRepositoryInterface):
         with DBConnectionHandler() as database:
             try:
                 cargos = (
-                    Cargo(entity.id_cargo, entity.descricao) 
+                    Cargo(entity.id, entity.descricao) 
                     for entity in 
                     database.session
                         .query(CargoEntity)
@@ -43,12 +43,12 @@ class CargoRepository(CargoRepositoryInterface):
     def find_by_id(cls, id: int) -> Cargo:
         with DBConnectionHandler() as database:
             try:
-                cargo_entity = (
+                entity = (
                     database.session.get(CargoEntity, id)
                 )
-                if cargo_entity is None:
+                if entity is None:
                     return None
-                return Cargo(cargo_entity.id_cargo, cargo_entity.descricao)
+                return Cargo(entity.id, entity.descricao)
             except Exception as exception:
                 database.session.rollback()
                 raise exception
