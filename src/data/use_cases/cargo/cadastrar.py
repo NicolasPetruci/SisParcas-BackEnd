@@ -10,4 +10,4 @@ class CadastrarCargo(CadastrarCargoInterface):
 
     def cadastrar(self, cargo: Cargo)->Dict:
         cargoInserir: Cargo = Cargo(None, cargo.descricao)
-        self.__repository.insert(cargoInserir)
+        return self.__repository.insert(cargoInserir).to_json()

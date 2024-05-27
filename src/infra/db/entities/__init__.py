@@ -1,2 +1,2 @@
-from .cargo import Cargo
-from .usuario import Usuario
+from .cargo import CargoEntity
+from .usuario import UsuarioEntity

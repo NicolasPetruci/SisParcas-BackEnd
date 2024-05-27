@@ -1,5 +1,5 @@
-
-class Cargo:
+from typing import Dict
+class Cargo():
 
     def __init__(self, id: int, descricao: str):
         self.__id = id
@@ -19,3 +19,9 @@ class Cargo:
 
     def set_descricao(self, descricao: str):
         self.__descricao = descricao
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "descricao": self.descricao,
+        }
