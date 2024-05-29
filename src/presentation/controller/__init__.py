@@ -1,1 +1,1 @@
-from .cargo_controller import CargoController
+from .cargo_controller import ManterCargoController

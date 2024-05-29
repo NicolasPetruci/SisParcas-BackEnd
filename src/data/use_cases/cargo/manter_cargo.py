@@ -1,10 +1,10 @@
 from src.domain.models import Cargo
-from src.domain.use_cases import CargoUseCasesInterface
+from src.domain.use_cases import ManterCargoInterface
 from src.data.interfaces import CargoRepositoryInterface
 from src.errors import HttpError
 from typing import Dict, List
 
-class CargoUseCases(CargoUseCasesInterface):
+class ManterCargo(ManterCargoInterface):
 
     @classmethod
     def __init__(self, repository: CargoRepositoryInterface):

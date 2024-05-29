@@ -1,2 +1,3 @@
 from .base_repository import BaseRepository
 from .cargo_repository import CargoRepositoryInterface
+from .usuario_repository import UsuarioRepositoryInterface

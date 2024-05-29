@@ -8,6 +8,7 @@ class UsuarioEntity(Base):
 
     id = Column(Integer, primary_key=True)
     nome = Column(String)
+    email = Column(String)
     telefone = Column(String)
     senha = Column(String)
     aniversario = Column(Date)

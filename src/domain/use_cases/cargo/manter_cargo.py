@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, Dict
 from src.domain.models import Cargo
 
-class CargoUseCasesInterface(ABC):
+class ManterCargoInterface(ABC):
 
     @abstractmethod
     def buscar_cargo_por_id(self, id: int) -> List[Dict]: pass
