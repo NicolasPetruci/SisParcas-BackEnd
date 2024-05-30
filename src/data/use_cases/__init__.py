@@ -1,2 +1,2 @@
-from .manter_cargo import ManterCargo
-from .manter_usuario import ManterUsuario
+from .cargo import ManterCargo
+from .usuario import ManterUsuario

@@ -1,1 +1,1 @@
-from .cargo import ManterCargoInterface
+from .manter_cargo import ManterCargoInterface

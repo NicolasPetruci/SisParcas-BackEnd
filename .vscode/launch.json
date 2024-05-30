@@ -6,17 +6,17 @@
     "configurations": [
         {
             "name": "Python: Flask",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "module": "flask",
             "env": {
                 "FLASK_APP": "run.py",
-                "FLASK_DEBUG": "1"
+                "FLASK_DEBUG": "1",
             },
             "args": [
                 "run",
-                "--no-debugger",
-                "--no-reload"
+                "--debug",
+                "--reload"
             ],
             "jinja": true,
             "justMyCode": true

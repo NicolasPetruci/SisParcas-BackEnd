@@ -1,16 +1,17 @@
 from datetime import date
+from .cargo import Cargo
 
 class Usuario():
 
     def __init__(
         self,
+        id: int,
         nome: str,
         email: str,
         telefone: str,
         senha: str,
         aniversario: date,
         cargo: Cargo,
-        id: int = None,
     ) -> None:
         self.__id = id
         self.__nome = nome
@@ -18,7 +19,7 @@ class Usuario():
         self.__telefone = telefone
         self.__senha = senha
         self.__aniversario = aniversario
-        self.__id_cargo = id_cargo
+        self.__cargo = cargo
     
     @property
     def id(self):
@@ -30,23 +31,23 @@ class Usuario():
 
     @property
     def email(self):
-        return self._email
+        return self.__email
 
     @property
     def telefone(self):
-        return self._telefone
+        return self.__telefone
 
     @property
     def senha(self):
-        return self._senha
+        return self.__senha
 
     @property
     def aniversario(self):
-        return self._aniversario
+        return self.__aniversario
 
     @property
-    def id_cargo(self):
-        return self._id_cargo
+    def cargo(self):
+        return self.__cargo
 
     def set_id(self, id: int):
         self.__id = id
@@ -66,6 +67,37 @@ class Usuario():
     def set_aniversario(self, aniversario):
         self.__aniversario = aniversario
 
-    def set_id_cargo(self, id_cargo):
-        self.__id_cargo = id_cargo
+    def set_cargo(self, cargo):
+        self.__cargo = cargo
 
+    @staticmethod
+    def from_entity(entity):
+        return Usuario(
+            entity.id, 
+            entity.nome, 
+            entity.email, 
+            entity.telefone, 
+            None, 
+            entity.aniversario,
+            entity.cargo
+        )
+
+    def to_json(self):
+        return {
+            "id": self.id,
+            "nome": self.nome,
+            "email": self.email, 
+            "telefone": self.telefone,
+            "aniversario": self.aniversario,
+            "cargo": self.cargo.to_json()
+        }
+
+class UsuarioLogin():
+
+    def __init__(
+        self,
+        email: str,
+        senha: str
+    ) -> None:
+        self.__email = email
+        self.__senha = senha

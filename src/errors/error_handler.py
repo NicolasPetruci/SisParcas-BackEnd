@@ -13,8 +13,8 @@ def handle_errors(error: Exception) -> HttpResponse:
                 }]
             }
         )
-
-    return HttpResponse(
+    raise error
+    """return HttpResponse(
         status_code=500,
         body={
             "error": [{
@@ -22,4 +22,4 @@ def handle_errors(error: Exception) -> HttpResponse:
                 "message": str(error)
             }]
         }
-    )
+    )"""

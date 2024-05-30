@@ -1,7 +1,8 @@
 from src.domain.models import Usuario
-from src.domain.use_cases import ManterUsuarioInterface
+from src.domain.use_cases.usuario import ManterUsuarioInterface
 from src.data.interfaces import UsuarioRepositoryInterface
 from src.errors import HttpError
+from src.main.adapters.auth import encrypt_password
 from typing import Dict, List
 
 class ManterUsuario(ManterUsuarioInterface):
@@ -25,9 +26,9 @@ class ManterUsuario(ManterUsuarioInterface):
             usuario.nome,
             usuario.email,
             usuario.telefone,
-            usuario.senha,
+            encrypt_password(usuario.senha),
             usuario.aniversario,
-            usuario.id_cargo
+            usuario.cargo
             )
         return {
             "usuario": self.__repository.insert(novo_usuario).to_json(),

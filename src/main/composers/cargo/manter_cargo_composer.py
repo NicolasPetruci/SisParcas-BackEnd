@@ -1,4 +1,6 @@
 from src.data.use_cases.cargo import ManterCargo
+from src.infra.db.repositories import CargoRepository
+from src.presentation.controller.cargo import ManterCargoController
 
 def compose_methods():
     repository = CargoRepository()

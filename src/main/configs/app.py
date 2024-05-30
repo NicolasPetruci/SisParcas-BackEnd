@@ -4,7 +4,8 @@ from importlib import import_module
 def register_blueprints(app: Flask):
     routes: tuple = (
         "default",
-        "cargo_routes"
+        "cargo_routes",
+        "usuario_routes",
     )
     for blueprint in routes:
         module = import_module("src.main.routes.{}".format(blueprint))

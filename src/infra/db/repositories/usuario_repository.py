@@ -11,11 +11,16 @@ class UsuarioRepository(UsuarioRepositoryInterface):
         with DBConnectionHandler() as database:
             try: 
                 entity = UsuarioEntity(
-                    nome = usuario.nome
+                    nome = usuario.nome,
+                    email = usuario.email,
+                    telefone = usuario.telefone,
+                    senha = usuario.senha,
+                    aniversario = usuario.aniversario,
+                    cargo = usuario.cargo
                 )
                 database.session.add(entity)
                 database.session.commit()
-                return Usuario(entity.id, entity.nome)
+                return Usuario.from_entity(entity)
             except Exception as exception:
                 database.session.rollback()
                 raise exception
@@ -25,7 +30,7 @@ class UsuarioRepository(UsuarioRepositoryInterface):
         with DBConnectionHandler() as database:
             try:
                 usuarios = (
-                    Usuario(entity.id, entity.nome) 
+                    Usuario.from_entity(entity)
                     for entity in 
                     database.session
                         .query(UsuarioEntity)
@@ -45,7 +50,7 @@ class UsuarioRepository(UsuarioRepositoryInterface):
                     return None
                 database.session.delete(entity)
                 database.session.commit()
-                return Usuario(entity.id, entity.nome)
+                return Usuario.from_entity(entity)
             except Exception as exception:
                 database.session.rollback()
                 raise exception
@@ -59,7 +64,7 @@ class UsuarioRepository(UsuarioRepositoryInterface):
                 )
                 if entity is None:
                     return None
-                return Usuario(entity.id, entity.nome)
+                return Usuario.from_entity(entity)
             except Exception as exception:
                 database.session.rollback()
                 raise exception
@@ -68,12 +73,28 @@ class UsuarioRepository(UsuarioRepositoryInterface):
     def update(cls, usuario: Usuario) -> Usuario:
         with DBConnectionHandler() as database:
             try:
-                entity = database.session.get(UsuarioEntity, usuario.id)
+                entity: UsuarioEntity = database.session.get(UsuarioEntity, usuario.id)
                 if entity is None:
                     return None
                 entity.nome = usuario.nome
+                entity.aniversario = usuario.aniversario
+                entity.email = usuario.email
+                entity.telefone = usuario.telefone
+                entity.cargo = usuario.cargo
                 database.session.commit()
-                return Usuario(entity.id, entity.nome)
+                return Usuario.from_entity(entity)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
+    
+    @classmethod
+    def find_user_by_email(cls, email: str) -> Usuario:
+        with DBConnectionHandler() as database:
+            try:
+                entity = database.session.get(UsuarioEntity, email)
+                if entity is None:
+                    return None
+                return Usuario.from_entity(entity)
             except Exception as exception:
                 database.session.rollback()
                 raise exception

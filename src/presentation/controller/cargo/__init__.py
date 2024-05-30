@@ -1,0 +1,1 @@
+from .manter_cargo_controller import ManterCargoController

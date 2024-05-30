@@ -1,5 +1,5 @@
 from src.domain.models import Cargo
-from src.domain.use_cases import ManterCargoInterface
+from src.domain.use_cases.cargo import ManterCargoInterface
 from src.data.interfaces import CargoRepositoryInterface
 from src.errors import HttpError
 from typing import Dict, List

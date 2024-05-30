@@ -1,4 +1,4 @@
-from src.domain.use_cases import ManterCargoInterface
+from src.domain.use_cases.cargo import ManterCargoInterface
 from src.domain.models import Cargo
 from src.presentation.http_types import HttpRequest, HttpResponse
 

@@ -56,7 +56,7 @@ def request_adapter(request: FlaskRequest, controller: Callable) -> HttpResponse
 
         http_response = controller(http_request)
         return http_response
-    except:
+    except HttpError:
         return handle_errors(HttpError.error_409)
 
      
