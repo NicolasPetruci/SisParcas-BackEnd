@@ -77,9 +77,9 @@ class Usuario():
             entity.nome, 
             entity.email, 
             entity.telefone, 
-            None, 
+            entity.senha, 
             entity.aniversario,
-            entity.cargo
+            Cargo.from_entity(entity=entity.cargo)
         )
 
     def to_json(self):
@@ -100,4 +100,19 @@ class UsuarioLogin():
         senha: str
     ) -> None:
         self.__email = email
+        self.__senha = senha
+
+    @property
+    def email(self):
+        return self.__email
+
+    @property
+    def senha(self):
+        return self.__senha
+    
+
+    def set_email(self, email):
+        self.__email = email
+
+    def set_senha(self, senha):
         self.__senha = senha

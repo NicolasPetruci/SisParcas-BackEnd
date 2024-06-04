@@ -1,18 +1,20 @@
 from src.infra.db.config import Base
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import relationship, Mapped, mapped_column 
+from sqlalchemy import ForeignKey, Column, Integer, Date, String
+from sqlalchemy.orm import relationship
 from datetime import date
+from .cargo import CargoEntity
 
 class UsuarioEntity(Base):
 
     __tablename__ = "usuario"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    nome: Mapped[str]
-    email: Mapped[str]
-    telefone: Mapped[str]
-    senha: Mapped[str]
-    aniversario: Mapped[date]
-    id_cargo: Mapped[int] = mapped_column(ForeignKey("cargo.id"))
-    cargo: Mapped["CargoEntity"] = relationship(back_populates="usuarios")
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome = Column(String)
+    email = Column(String)
+    telefone = Column(String)
+    senha = Column(String)
+    aniversario = Column(Date)
+
+    id_cargo = Column(Integer, ForeignKey("cargo.id"))
+    cargo = relationship("CargoEntity", back_populates="usuarios")
   

@@ -1,11 +1,12 @@
 from src.infra.db.config import Base
-from sqlalchemy.orm import relationship, mapped_column, Mapped
+from sqlalchemy import Column, String, Integer
+from sqlalchemy.orm import relationship
 from typing import List
 
 class CargoEntity(Base):
     __tablename__ = "cargo"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    descricao: Mapped[str]
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    descricao = Column(String)
 
-    usuarios: Mapped[List["UsuarioEntity"]] = relationship(back_populates="cargo")
+    usuarios = relationship("UsuarioEntity", back_populates="cargo")

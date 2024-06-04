@@ -24,7 +24,7 @@ def encode_token(payload:Payload) -> str:
 def decode_token(token):
     salt = config("SECRET_WEB", default="SisParcas", cast=str)
     try:
-        decode = jwt.decode(token, salt, algorithm="HS256")
+        decode = jwt.decode(token, salt, algorithms="HS256")
         return decode
-    except:
-        return None
+    except Exception as e:
+        raise e

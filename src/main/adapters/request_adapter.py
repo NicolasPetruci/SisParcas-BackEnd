@@ -35,10 +35,10 @@ def request_adapter(request: FlaskRequest, controller: Callable) -> HttpResponse
         elif request.headers.get("Authorization"):
             raw_token = request.headers.get("Authorization").split()[1]
         else: 
-            return handle_errors(HttpError(HttpError.error_401()))
+            raise HttpError(HttpError.error_401())
         token = decode_token(raw_token)
-    except:
-        return handle_errors(HttpError(HttpError.error_401()))
+    except Exception as exception:
+        return handle_errors(exception)
     
     try:
         body = None
@@ -56,7 +56,7 @@ def request_adapter(request: FlaskRequest, controller: Callable) -> HttpResponse
 
         http_response = controller(http_request)
         return http_response
-    except HttpError:
-        return handle_errors(HttpError.error_409)
+    except Exception as exception:
+        return handle_errors(exception)
 
      

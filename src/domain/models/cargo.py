@@ -25,3 +25,10 @@ class Cargo():
             "id": self.id,
             "descricao": self.descricao,
         }
+    
+    @staticmethod
+    def from_entity(entity):
+        return Cargo(
+            entity.id,
+            entity.descricao,
+        )

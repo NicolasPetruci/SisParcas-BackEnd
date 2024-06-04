@@ -1,7 +1,8 @@
 from src.domain.models import Usuario
-from src.infra.db.entities import UsuarioEntity
+from src.infra.db.entities import UsuarioEntity, CargoEntity
 from src.infra.db.config import DBConnectionHandler
 from src.data.interfaces import UsuarioRepositoryInterface
+from sqlalchemy import select
 from typing import List
 
 class UsuarioRepository(UsuarioRepositoryInterface):
@@ -16,7 +17,7 @@ class UsuarioRepository(UsuarioRepositoryInterface):
                     telefone = usuario.telefone,
                     senha = usuario.senha,
                     aniversario = usuario.aniversario,
-                    cargo = usuario.cargo
+                    cargo = database.session.get(CargoEntity, usuario.cargo.id)
                 )
                 database.session.add(entity)
                 database.session.commit()
@@ -91,7 +92,11 @@ class UsuarioRepository(UsuarioRepositoryInterface):
     def find_user_by_email(cls, email: str) -> Usuario:
         with DBConnectionHandler() as database:
             try:
-                entity = database.session.get(UsuarioEntity, email)
+                entity = database.session.scalars(
+                    select(UsuarioEntity)
+                    .filter_by(email = email)
+                    .limit(1)
+                ).first()
                 if entity is None:
                     return None
                 return Usuario.from_entity(entity)

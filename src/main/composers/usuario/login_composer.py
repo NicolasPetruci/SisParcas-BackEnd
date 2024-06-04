@@ -1,5 +1,5 @@
 from src.data.use_cases.usuario import Login
-from src.infra.db.repositories import CargoRepository
+from src.infra.db.repositories import UsuarioRepository
 from src.presentation.controller.usuario import LoginController
 
 def compose_methods():
