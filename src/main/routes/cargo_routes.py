@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 
-from src.main.adapters import request_adapter_no_token
+from src.main.adapters import request_adapter_dono
 from src.main.composers.cargo import cadastrar_cargo_composer,\
                                      buscar_cargos_composer,\
                                      buscar_cargo_por_id_composer,\
@@ -16,7 +16,7 @@ def cadastrar_cargo():
     http_response = None
 
     try:
-        http_response = request_adapter_no_token(request, cadastrar_cargo_composer())
+        http_response = request_adapter_dono(request, cadastrar_cargo_composer())
     except Exception as exception:
         http_response = handle_errors(exception)
 
@@ -27,9 +27,9 @@ def buscar_cargos():
     http_response = None
     try:
         if(request.args):
-            http_response = request_adapter_no_token(request, buscar_cargo_por_id_composer())
+            http_response = request_adapter_dono(request, buscar_cargo_por_id_composer())
         else:
-            http_response = request_adapter_no_token(request, buscar_cargos_composer())
+            http_response = request_adapter_dono(request, buscar_cargos_composer())
     except Exception as exception:
         http_response = handle_errors(exception)
         
@@ -40,7 +40,7 @@ def atualizar_cargo():
     http_response = None
 
     try:
-        http_response = request_adapter_no_token(request, atualizar_cargo_composer())
+        http_response = request_adapter_dono(request, atualizar_cargo_composer())
     except Exception as exception:
         http_response = handle_errors(exception)
 
@@ -50,7 +50,7 @@ def atualizar_cargo():
 def excluir_cargo():
     http_response = None
     try:
-        http_response = request_adapter_no_token(request, excluir_cargo_composer())
+        http_response = request_adapter_dono(request, excluir_cargo_composer())
     except Exception as exception:
         http_response = handle_errors(exception)
 
