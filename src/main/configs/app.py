@@ -6,6 +6,7 @@ def register_blueprints(app: Flask):
         "default",
         "cargo_routes",
         "usuario_routes",
+        "evento_routes",
     )
     for blueprint in routes:
         module = import_module("src.main.routes.{}".format(blueprint))
