@@ -81,6 +81,10 @@ class Usuario():
             entity.aniversario,
             Cargo.from_entity(entity=entity.cargo)
         )
+    
+    @staticmethod
+    def list_from_entities(entities):
+        return [from_entity(entity) for entity in entities]
 
     def to_json(self):
         return {
