@@ -1,0 +1,2 @@
+from .manter_evento import ManterEventoInterface
+from .inscricao_evento import InscricaoEventoInterface

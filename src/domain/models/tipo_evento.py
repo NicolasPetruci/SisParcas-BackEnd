@@ -28,6 +28,8 @@ class TipoEvento():
     
     @staticmethod
     def from_entity(entity):
+        if not entity:
+            return None
         return TipoEvento(
             entity.id,
             entity.descricao,

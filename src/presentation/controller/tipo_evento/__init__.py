@@ -1,1 +1,1 @@
-from .manter_tipo_evento import ManteerTipoEventoController
+from .manter_tipo_evento import ManterTipoEventoController
