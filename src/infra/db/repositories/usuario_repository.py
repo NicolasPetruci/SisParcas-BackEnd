@@ -17,7 +17,8 @@ class UsuarioRepository(UsuarioRepositoryInterface):
                     telefone = usuario.telefone,
                     senha = usuario.senha,
                     aniversario = usuario.aniversario,
-                    cargo = database.session.get(CargoEntity, usuario.cargo.id)
+                    cargo = database.session.get(CargoEntity, usuario.cargo.id),
+                    eventos = []
                 )
                 database.session.add(entity)
                 database.session.commit()

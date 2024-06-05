@@ -3,7 +3,7 @@ from .tipo_evento import TipoEvento
 from .usuario import Usuario
 from typing import List
 
-class Usuario():
+class Evento():
 
     def __init__(
         self,
@@ -23,6 +23,7 @@ class Usuario():
         self.__online = online
         self.__data_hora = data_hora
         self.__tipo_evento = tipo_evento
+        self.__participantes = participantes
     
     @property
     def id(self):
@@ -88,7 +89,7 @@ class Usuario():
 
     @staticmethod
     def from_entity(entity):
-        return Usuario(
+        return Evento(
             entity.id, 
             entity.nome, 
             entity.descricao, 

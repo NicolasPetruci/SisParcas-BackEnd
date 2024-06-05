@@ -1,3 +1,4 @@
 from .cargo_repository import CargoRepository
 from .usuario_repository import UsuarioRepository
 from .tipo_evento_repository import TipoEventoRepository
+from .evento_repository import EventoRepository
