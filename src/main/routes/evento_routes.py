@@ -14,7 +14,9 @@ from src.main.composers.evento import cadastrar_evento_composer,\
                                      buscar_eventos_composer,\
                                      buscar_evento_por_id_composer,\
                                      atualizar_evento_composer, \
-                                     excluir_evento_composer
+                                     excluir_evento_composer, \
+                                     inscrever_composer, \
+                                     desinscrever_composer
 
 from src.errors import handle_errors
 
@@ -91,6 +93,28 @@ def excluir_evento():
     http_response = None
     try:
         http_response = request_adapter_adm(request, excluir_evento_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code
+
+
+@blueprint.route("/evento/inscrever", methods=["PUT"])
+def inscrever_evento():
+    http_response = None
+    try:
+        http_response = request_adapter(request, inscrever_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code
+
+
+@blueprint.route("/evento/desinscrever", methods=["PUT"])
+def desinscrever_evento():
+    http_response = None
+    try:
+        http_response = request_adapter(request, desinscrever_composer())
     except Exception as exception:
         http_response = handle_errors(exception)
 

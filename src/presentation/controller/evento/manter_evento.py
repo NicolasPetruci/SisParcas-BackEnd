@@ -1,5 +1,5 @@
 from src.domain.use_cases.evento import ManterEventoInterface
-from src.domain.models import Evento
+from src.domain.models import Evento, TipoEvento
 from src.presentation.http_types import HttpRequest, HttpResponse
 
 class ManterEventoController():
@@ -24,9 +24,9 @@ class ManterEventoController():
         request.body["nome"], 
         request.body["descricao"],
         request.body["local"],
+        request.body["online"],
         request.body["data_hora"], 
-        request.body["tipo_evento"], 
-        request.body["participantes"]
+        TipoEvento(request.body["tipo_evento"]["id"], request.body["tipo_evento"]["descricao"])
         )
         response = self.__use_case.cadastrar(form)
 
@@ -45,15 +45,25 @@ class ManterEventoController():
     
     @classmethod
     def atualizar(self, request: HttpRequest) -> HttpResponse: 
-        form = Evento(
-                    request.body["id"],
-                    request.body["nome"], 
-                    request.body["descricao"],
-                    request.body["local"],
-                    request.body["data_hora"], 
-                    request.body["tipo_evento"], 
-                    request.body["participantes"]
+        form = Evento()
+        if("id" not in request.body):
+            raise HttpError(HttpError.error_400("O campo 'id' é obrigatório."))
+        form.set_id(request.body["id"])
+        if "nome" in request.body:
+            form.set_nome(request.body["nome"])
+        if "descricao" in request.body:
+            form.set_descricao(request.body["descricao"])
+        if "local" in request.body:
+            form.set_local(request.body["local"])
+        if "data_hora" in request.body:
+            form.set_data_hora(request.body["data_hora"])
+        if "tipo_evento" in request.body:
+            form.set_tipo_evento(
+                TipoEvento(
+                    request.body["tipo_evento"]["id"],
+                    request.body["tipo_evento"]["descricao"],
                 )
+            )
         response = self.__use_case.atualizar(form)
         return HttpResponse (
             status_code=200,

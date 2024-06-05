@@ -1,2 +1,2 @@
-from .manter_evento import manter_evento_controller
-from .inscricao_evento import inscricao_evento_controller
+from .manter_evento import ManterEventoController
+from .inscricao_evento import InscricaoEventoController

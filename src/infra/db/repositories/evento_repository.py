@@ -13,10 +13,10 @@ class EventoRepository(EventoRepositoryInterface):
             try: 
                 entity = EventoEntity(
                     nome = evento.nome,
+                    descricao = evento.descricao,
                     local = evento.local,
                     online = evento.online,
-                    senha = evento.senha,
-                    descricao = evento.descricao,
+                    data_hora = evento.data_hora,
                     tipo_evento = database.session.get(TipoEventoEntity, evento.tipo_evento.id),
                     participantes = [
                          database.session.get(UsuarioEntity, usuario.id) 
@@ -37,9 +37,9 @@ class EventoRepository(EventoRepositoryInterface):
                 eventos = (
                     Evento.from_entity(entity)
                     for entity in 
-                    database.session
-                        .query(EventoEntity)
-                        .all()
+                    database.session.scalars(
+                                select(EventoEntity)
+                            ).all()
                 )
                 return eventos
             except Exception as exception:
@@ -81,15 +81,21 @@ class EventoRepository(EventoRepositoryInterface):
                 entity: EventoEntity = database.session.get(EventoEntity, evento.id)
                 if entity is None:
                     return None
-                entity.nome = evento.nome
-                entity.descricao = evento.descricao
-                entity.local = evento.local
-                entity.online = evento.online
-                entity.tipo_evento = database.session.get(TipoEventoEntity, tipo_evento.id)
-                entity.participantes = [
+                if evento.nome:
+                    entity.nome = evento.nome
+                if evento.descricao:
+                    entity.descricao = evento.descricao
+                if evento.local:
+                    entity.local = evento.local
+                if evento.online:
+                    entity.online = evento.online
+                if evento.tipo_evento:
+                    entity.tipo_evento = database.session.get(TipoEventoEntity, evento.tipo_evento.id)
+                if evento.participantes:
+                    entity.participantes = [
                          database.session.get(UsuarioEntity, usuario.id) 
                          for usuario in evento.participantes
-                ]
+                    ]
                 database.session.commit()
                 return Evento.from_entity(entity)
             except Exception as exception:

@@ -84,7 +84,7 @@ class Usuario():
     
     @staticmethod
     def list_from_entities(entities):
-        return [from_entity(entity) for entity in entities]
+        return [Usuario.from_entity(entity) for entity in entities]
 
     def to_json(self):
         return {

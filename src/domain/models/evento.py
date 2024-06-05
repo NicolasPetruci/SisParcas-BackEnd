@@ -7,14 +7,14 @@ class Evento():
 
     def __init__(
         self,
-        id: int,
-        nome: str,
-        descricao: str,
-        local: str,
-        online: bool,
-        data_hora: datetime,
-        tipo_evento: TipoEvento,
-        participantes: List[Usuario]
+        id: int = None,
+        nome: str = None,
+        descricao: str = None,
+        local: str = None,
+        online: bool = None,
+        data_hora: datetime = None,
+        tipo_evento: TipoEvento = None,
+        participantes: List[Usuario] = [],
     ) -> None:
         self.__id = id
         self.__nome = nome
@@ -96,7 +96,7 @@ class Evento():
             entity.local, 
             entity.online, 
             entity.data_hora,
-            TipoEvento.from_entity(entity=entity.tipo_evento),
+            TipoEvento.from_entity(entity.tipo_evento),
             Usuario.list_from_entities(entity.participantes),
         )
 
@@ -107,5 +107,6 @@ class Evento():
             "descricao": self.descricao, 
             "local": self.local,
             "data_hora": self.data_hora,
-            "tipo_evento": self.tipo_evento.to_json()
+            "tipo_evento": self.tipo_evento.to_json() if self.tipo_evento else None,
+            "participantes": [p.to_json() for p in self.participantes]
         }

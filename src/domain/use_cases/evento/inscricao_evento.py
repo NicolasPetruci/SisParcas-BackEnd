@@ -2,10 +2,10 @@ from src.data.interfaces import EventoRepositoryInterface
 from abc import ABC, abstractmethod
 from typing import List, Dict
 
-class InscreverEventoInterface(ABC):
+class InscricaoEventoInterface(ABC):
 
     @abstractmethod
-    def inscrever(self, id: int) -> Dict: pass
+    def inscrever(self, id_usuario: int, id_evento: int) -> Dict: pass
 
     @abstractmethod
-    def desinscrever(self, id: int) -> Dict: pass
+    def desinscrever(self, id_usuario: int, id_evento: int) -> Dict: pass

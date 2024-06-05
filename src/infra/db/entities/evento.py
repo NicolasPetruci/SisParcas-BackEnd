@@ -17,10 +17,11 @@ class EventoEntity(Base):
     data_hora = Column(Date)
 
     id_tipo_evento = Column(Integer, ForeignKey("tipo_evento.id"))
-    tipo_evento = relationship("TipoEventoEntity", back_populates="eventos")
+    tipo_evento = relationship("TipoEventoEntity", back_populates="eventos", lazy="joined")
     participantes = relationship(
                                  "UsuarioEntity", 
                                  secondary = participante_evento_association,
                                  back_populates="eventos",
+                                 lazy="selectin"
                     )
   

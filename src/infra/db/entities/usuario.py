@@ -17,7 +17,7 @@ class UsuarioEntity(Base):
     aniversario = Column(Date)
 
     id_cargo = Column(Integer, ForeignKey("cargo.id"))
-    cargo = relationship("CargoEntity", back_populates="usuarios")
+    cargo = relationship("CargoEntity", back_populates="usuarios", lazy="joined")
     eventos = relationship("EventoEntity", 
                             secondary = participante_evento_association,
                             back_populates="participantes",
