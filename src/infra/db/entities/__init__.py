@@ -7,4 +7,5 @@ from .sessao import SessaoEntity
 from .genero import GeneroEntity
 from .jogador_sessao import jogador_sessao_association
 from .jogador_rpg import jogador_rpg_association
+from .genero_rpg import genero_rpg_association
 from .participante_evento import participante_evento_association
