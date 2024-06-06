@@ -1,5 +1,5 @@
 from src.infra.db.config import Base
-from sqlalchemy import ForeignKey, Column, Integer, Date, String, Boolean
+from sqlalchemy import ForeignKey, Column, Integer, DateTime, String, Boolean
 from sqlalchemy.orm import relationship
 from datetime import date
 from .tipo_evento import TipoEventoEntity
@@ -14,7 +14,7 @@ class EventoEntity(Base):
     descricao = Column(String)
     local = Column(String)
     online = Column(Boolean)
-    data_hora = Column(Date)
+    data_hora = Column(DateTime)
 
     id_tipo_evento = Column(Integer, ForeignKey("tipo_evento.id"))
     tipo_evento = relationship("TipoEventoEntity", back_populates="eventos", lazy="joined")

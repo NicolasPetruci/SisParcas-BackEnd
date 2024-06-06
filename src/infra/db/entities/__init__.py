@@ -2,4 +2,9 @@ from .cargo import CargoEntity
 from .usuario import UsuarioEntity
 from .tipo_evento import TipoEventoEntity
 from .evento import EventoEntity
+from .rpg import RpgEntity
+from .sessao import SessaoEntity
+from .genero import GeneroEntity
+from .jogador_sessao import jogador_sessao_association
+from .jogador_rpg import jogador_rpg_association
 from .participante_evento import participante_evento_association
