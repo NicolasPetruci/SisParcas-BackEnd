@@ -23,27 +23,7 @@ def get_token(request):
 def request_adapter_no_token(request: FlaskRequest, controller: Callable) -> HttpResponse:
 
     body = None
-    if request.data: 
-        body = request.json
-
-    http_request = HttpRequest(
-        body=body,
-        headers=request.headers,
-        query_params=request.args,
-        path_params=request.view_args,
-        url=request.full_path
-    )
-
-
-    http_response = controller(http_request)
-    return http_response
-
-def request_adapter(request: FlaskRequest, controller: Callable) -> HttpResponse:
-
-    token = get_token(request)
-    
     try:
-        body = None
         if request.data: 
             body = request.json
 
@@ -55,11 +35,19 @@ def request_adapter(request: FlaskRequest, controller: Callable) -> HttpResponse
             url=request.full_path
         )
 
-
         http_response = controller(http_request)
+        http_response.headers.add("Access-Control-Allow-Origin", "*")
+        http_response.headers.add("Access-Control-Allow-Headers", "*")
+        http_response.headers.add("Access-Control-Allow-Methods", "*")
         return http_response
     except Exception as exception:
         return handle_errors(exception)
+
+def request_adapter(request: FlaskRequest, controller: Callable) -> HttpResponse:
+
+    token = get_token(request)
+    
+    return request_adapter_no_token(request, controller)
 
 def request_adapter_dono(request: FlaskRequest, controller: Callable) -> HttpResponse:
 
@@ -68,24 +56,7 @@ def request_adapter_dono(request: FlaskRequest, controller: Callable) -> HttpRes
     if(token.cargo != "DONO"):
         raise HttpError(HttpError.error_401())
     
-    try:
-        body = None
-        if request.data: 
-            body = request.json
-
-        http_request = HttpRequest(
-            body=body,
-            headers=request.headers,
-            query_params=request.args,
-            path_params=request.view_args,
-            url=request.full_path
-        )
-
-
-        http_response = controller(http_request)
-        return http_response
-    except Exception as exception:
-        return handle_errors(exception)
+    return request_adapter_no_token(request, controller)
     
 def request_adapter_adm(request: FlaskRequest, controller: Callable) -> HttpResponse:
 
@@ -94,21 +65,4 @@ def request_adapter_adm(request: FlaskRequest, controller: Callable) -> HttpResp
     if(token.cargo == "DEFAULT"):
         raise HttpError(HttpError.error_401())
     
-    try:
-        body = None
-        if request.data: 
-            body = request.json
-
-        http_request = HttpRequest(
-            body=body,
-            headers=request.headers,
-            query_params=request.args,
-            path_params=request.view_args,
-            url=request.full_path
-        )
-
-
-        http_response = controller(http_request)
-        return http_response
-    except Exception as exception:
-        return handle_errors(exception)
+    return request_adapter_no_token(request, controller)
