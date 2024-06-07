@@ -2,19 +2,29 @@ from src.data.interfaces import UsuarioRepositoryInterface
 from abc import ABC, abstractmethod
 from typing import List, Dict
 
+
 class ManterUsuarioInterface(ABC):
 
     @abstractmethod
-    def buscar_usuario_por_id(self, id: int) -> List[Dict]: pass
+    def buscar_usuario_por_id(self, id: int) -> List[Dict]:
+        pass
 
     @abstractmethod
-    def buscar_usuarios(self) -> List[Dict]: pass
+    def buscar_usuarios(self) -> List[Dict]:
+        pass
 
     @abstractmethod
-    def cadastrar(self, usuario) -> Dict: pass
+    def cadastrar(self, usuario) -> Dict:
+        pass
 
     @abstractmethod
-    def atualizar(self, usuario) -> Dict: pass
-    
+    def atualizar(self, usuario) -> Dict:
+        pass
+
     @abstractmethod
-    def excluir(self, id: int) -> Dict: pass
+    def excluir(self, id: int) -> Dict:
+        pass
+
+    @abstractmethod
+    def buscar_usuarios_por_cargo(self, cargo: str) -> List[Dict]:
+        pass

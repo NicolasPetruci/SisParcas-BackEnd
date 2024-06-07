@@ -18,6 +18,16 @@ class ManterUsuario(ManterUsuarioInterface):
         if usuario is None:
             raise HttpError(HttpError.error_404("Usuario não encontrado."))
         return usuario.to_json()
+    
+    @classmethod
+    def buscar_usuarios_por_cargo(self, cargo: str) -> List[Dict]:
+        
+        usuarios: List[Usuario] = self.__repository.find_by_cargo(cargo)
+        
+        
+        usuarios_json = [usuario.to_json() for usuario in usuarios]
+
+        return usuarios_json
 
     @classmethod
     def cadastrar(self, usuario: Usuario)->Dict:
