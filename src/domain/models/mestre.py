@@ -2,15 +2,13 @@
 class Mestre:
     def __init__(
         self,
-        id,
-        ativo,
-        id_usuario,
-        usuario,
-        rpgs,
+        id = None,
+        ativo = None,
+        usuario = None,
+        rpgs = None,
     ):
         self.__id = id
         self.__ativo = ativo
-        self.__id_usuario = id_usuario
         self.__usuario = usuario
         self.__rpgs = rpgs   
 
@@ -20,9 +18,6 @@ class Mestre:
     @property
     def ativo(ativo):
         return self.__ativo
-    @property
-    def id_usuario(id_usuario):
-        return self.__id_usuario
     @property
     def usuario(usuario):
         return self.__usuario
@@ -36,9 +31,6 @@ class Mestre:
     def set_ativo(self, ativo):
         self.__ativo = ativo
 
-    def set_id_usuario(self, id_usuario):
-        self.__id_usuario = id_usuario
-
     def set_usuario(self, usuario):
         self.__usuario = usuario
 
@@ -49,7 +41,6 @@ class Mestre:
     def from_entity(entity):
         self.__id = id
         self.__ativo = ativo
-        self.__id_usuario = id_usuario
         self.__usuario = usuario
         self.__rpgs = rpgs
 
@@ -57,7 +48,6 @@ class Mestre:
         return {
             "id": self.id,
             "ativo": self.ativo,
-            "id_usuario": self.id_usuario,
             "usuario": self.usuario,
             "rpgs": self.rpgs,
         }
