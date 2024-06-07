@@ -5,3 +5,4 @@ from .evento import Evento
 from .rpg import Rpg
 from .genero import Genero
 from .sessao import Sessao
+from .mestre import Mestre

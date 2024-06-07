@@ -5,6 +5,7 @@ from .evento import EventoEntity
 from .rpg import RpgEntity
 from .sessao import SessaoEntity
 from .genero import GeneroEntity
+from .mestre import MestreEntity
 from .jogador_sessao import jogador_sessao_association
 from .jogador_rpg import jogador_rpg_association
 from .genero_rpg import genero_rpg_association

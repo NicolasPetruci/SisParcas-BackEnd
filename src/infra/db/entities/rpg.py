@@ -14,8 +14,8 @@ class RpgEntity(Base):
     nome = Column(String)
     descricao = Column(String)
 
-    id_mestre = Column(Integer, ForeignKey("usuario.id"))
-    mestre = relationship("UsuarioEntity", back_populates="rpgs", lazy="joined")
+    id_mestre = Column(Integer, ForeignKey("mestre.id"))
+    mestre = relationship("MestreEntity", back_populates="rpgs", lazy="joined")
     jogadores = relationship(
                                 "UsuarioEntity", 
                                 secondary = jogador_rpg_association,
