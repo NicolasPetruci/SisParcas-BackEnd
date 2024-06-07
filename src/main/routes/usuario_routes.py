@@ -11,6 +11,9 @@ from src.main.composers.usuario import (
 )
 from flask_cors import cross_origin
 from src.errors import handle_errors
+from src.main.composers.usuario.manter_usuario_composer import (
+    buscar_usuarios_por_cargo_composer,
+)
 
 blueprint = Blueprint("usuario_routes", __name__)
 

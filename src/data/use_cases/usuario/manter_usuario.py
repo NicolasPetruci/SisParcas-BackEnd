@@ -5,52 +5,52 @@ from src.errors import HttpError
 from src.main.adapters.auth import encrypt_password
 from typing import Dict, List
 
+from src.presentation.http_types.http_request import HttpRequest
+from src.presentation.http_types.http_response import HttpResponse
+
+
 class ManterUsuario(ManterUsuarioInterface):
 
     @classmethod
     def __init__(self, repository: UsuarioRepositoryInterface):
         self.__repository = repository
 
-    
     @classmethod
     def buscar_usuario_por_id(self, id: int) -> Dict:
         usuario = self.__repository.find_by_id(id)
         if usuario is None:
             raise HttpError(HttpError.error_404("Usuario não encontrado."))
         return usuario.to_json()
-    
-    @classmethod
-    def buscar_usuarios_por_cargo(self, cargo: str) -> List[Dict]:
-        
-        usuarios: List[Usuario] = self.__repository.find_by_cargo(cargo)
-        
-        
-        usuarios_json = [usuario.to_json() for usuario in usuarios]
-
-        return usuarios_json
 
     @classmethod
-    def cadastrar(self, usuario: Usuario)->Dict:
+    def cadastrar(self, usuario: Usuario) -> Dict:
         novo_usuario: Usuario = Usuario(
-            None, 
+            None,
             usuario.nome,
             usuario.email,
             usuario.telefone,
             encrypt_password(usuario.senha),
             usuario.aniversario,
-            usuario.cargo
-            )
+            usuario.cargo,
+        )
         return {
             "usuario": self.__repository.insert(novo_usuario).to_json(),
             "message": "Usuario cadastrado com sucesso.",
         }
-    
 
     @classmethod
     def buscar_usuarios(self) -> List[Dict]:
         usuarios: List[Usuario] = self.__repository.find_all()
-        return list(c.to_json() for c in usuarios) 
-    
+        return list(c.to_json() for c in usuarios)
+
+    @classmethod
+    def buscar_por_cargo(self, request: HttpRequest) -> HttpResponse:
+        cargo = request.query_params.get("cargo")
+        if not cargo:
+            return HttpResponse(status_code=400, body={"error": "Cargo é obrigatório"})
+        response = self.__use_case.buscar_usuarios_por_cargo(cargo)
+        return HttpResponse(status_code=200, body=response)
+
     @classmethod
     def atualizar(self, usuario: Usuario) -> Dict:
         usuario_atualizado = self.__repository.update(usuario)
@@ -60,9 +60,9 @@ class ManterUsuario(ManterUsuarioInterface):
             "usuario": usuario_atualizado.to_json(),
             "message": "Usuario cadastrado com sucesso.",
         }
-    
+
     @classmethod
-    def excluir(self, id: int) -> Dict: 
+    def excluir(self, id: int) -> Dict:
         usuario_excluido = self.__repository.delete_by_id(id)
         if usuario_excluido is None:
             raise HttpError(HttpError.error_404("Usuario não encontrado."))
