@@ -5,9 +5,6 @@ from src.domain.models import TipoEvento
 class ManterTipoEventoInterface(ABC):
 
     @abstractmethod
-    def buscar_tipo_evento_por_id(self, id: int) -> List[Dict]: pass
-
-    @abstractmethod
     def buscar_tipo_eventos(self) -> List[Dict]: pass
 
     @abstractmethod

@@ -17,7 +17,7 @@ class SessaoEntity(Base):
     numero = Column(Integer)
     
     id_rpg = Column(Integer, ForeignKey("rpg.id"))
-    rpg = relationship("RpgEntity", back_populates="sessoes", lazy="joined")
+    rpg = relationship("RPGEntity", back_populates="sessoes", lazy="joined")
     jogadores = relationship(
                                 "UsuarioEntity", 
                                 secondary = jogador_sessao_association,

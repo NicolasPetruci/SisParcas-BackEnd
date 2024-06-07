@@ -2,7 +2,7 @@ from typing import List
 from .usuario import Usuario
 from .genero import Genero
 
-class Rpg:
+class RPG:
     
     def __init__(
         self,
@@ -57,9 +57,17 @@ class Rpg:
     def set_generos(self, generos):
         self.__generos = generos
     
+    def adicionar_jogador(self, jogador):
+        self.__jogadores.append(jogador)
+    
+
+    def remover_jogador(self, jogador):
+        self.__jogadores.reemove(jogador)
+
+
     @staticmethod
     def from_entity(entity):
-        return Rpg(
+        return RPG(
             entity.id,
             entity.nome,
             entity.descricao,

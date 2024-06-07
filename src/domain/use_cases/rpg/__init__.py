@@ -1,0 +1,2 @@
+from .manter_rpg import ManterRPGInterface
+from .inscricao_rpg import InscricaoRPGInterface

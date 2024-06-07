@@ -9,4 +9,4 @@ class GeneroEntity(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     descricao = Column(String)
 
-    rpgs = relationship("RpgEntity", back_populates="genero")
+    rpgs = relationship("RPGEntity", back_populates="genero")

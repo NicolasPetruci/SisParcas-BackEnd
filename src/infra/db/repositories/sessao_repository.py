@@ -1,5 +1,5 @@
 from src.domain.models import Sessao
-from src.infra.db.entities import SessaoEntity, RpgEntity, UsuarioEntity
+from src.infra.db.entities import SessaoEntity, RPGEntity, UsuarioEntity
 from src.infra.db.config import DBConnectionHandler
 from src.data.interfaces import SessaoRepositoryInterface
 from sqlalchemy import select
@@ -17,7 +17,7 @@ class SessaoRepository(SessaoRepositoryInterface):
                     temporada = sessao.temporada,
                     numero = sessao.numero,
                     data_hora = sessao.data_hora,
-                    rpg = database.session.get(RpgEntity, sessao.rpg.id),
+                    rpg = database.session.get(RPGEntity, sessao.rpg.id),
                     jogadores = [
                          database.session.get(UsuarioEntity, usuario.id) 
                          for usuario in sessao.jogadores
@@ -90,7 +90,7 @@ class SessaoRepository(SessaoRepositoryInterface):
                 if sessao.numero:
                     entity.numero = sessao.numero
                 if sessao.rpg:
-                    entity.rpg = database.session.get(RpgEntity, sessao.rpg.id)
+                    entity.rpg = database.session.get(RPGEntity, sessao.rpg.id)
                 if sessao.jogadores:
                     entity.jogadores = [
                          database.session.get(UsuarioEntity, usuario.id) 

@@ -4,5 +4,6 @@ from .usuario_repository import UsuarioRepositoryInterface
 from .tipo_evento_repository import TipoEventoRepositoryInterface
 from .evento_repository import EventoRepositoryInterface
 from .genero_repository import GeneroRepositoryInterface
-from .rpg_repository import RpgRepositoryInterface
+from .rpg_repository import RPGRepositoryInterface
 from .sessao_repository import SessaoRepositoryInterface
+from .mestre_repository import MestreRepositoryInterface

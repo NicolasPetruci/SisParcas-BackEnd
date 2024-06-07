@@ -1,0 +1,2 @@
+from .inscricao_mestre import InscricaoMestreInterface
+from .manter_mestre import ManterMestreInterface

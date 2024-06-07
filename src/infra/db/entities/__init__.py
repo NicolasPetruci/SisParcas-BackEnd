@@ -2,7 +2,7 @@ from .cargo import CargoEntity
 from .usuario import UsuarioEntity
 from .tipo_evento import TipoEventoEntity
 from .evento import EventoEntity
-from .rpg import RpgEntity
+from .rpg import RPGEntity
 from .sessao import SessaoEntity
 from .genero import GeneroEntity
 from .mestre import MestreEntity

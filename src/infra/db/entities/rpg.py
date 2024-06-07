@@ -6,7 +6,7 @@ from .usuario import UsuarioEntity
 from .jogador_rpg import jogador_rpg_association
 from .genero_rpg import genero_rpg_association
 
-class RpgEntity(Base):
+class RPGEntity(Base):
 
     __tablename__ = "rpg"
 

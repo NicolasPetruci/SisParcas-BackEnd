@@ -1,5 +1,5 @@
 from typing import List
-from src.domain.models import Usuario, Rpg
+from src.domain.models import Usuario, RPG
 from datetime import datetime
 
 class Sessao:
@@ -12,7 +12,7 @@ class Sessao:
         data_hora: datetime,
         temporada: int,
         numero: int,
-        rpg: Rpg,
+        rpg: RPG,
         jogadores: List[Usuario],
     ):
         self.__id = id
