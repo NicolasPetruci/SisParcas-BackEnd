@@ -1,0 +1,105 @@
+from src.domain.models import Rpg
+from src.infra.db.entities import RpgEntity, UsuarioEntity, GeneroEntity
+from src.infra.db.config import DBConnectionHandler
+from src.data.interfaces import RpgRepositoryInterface
+from sqlalchemy import select
+from typing import List
+
+class RpgRepository(RpgRepositoryInterface):
+
+    @classmethod
+    def insert(cls, rpg: Rpg) -> Rpg:
+        with DBConnectionHandler() as database:
+            try: 
+                entity = RpgEntity(
+                    nome = rpg.nome,
+                    descricao = rpg.descricao,
+                    mestre = database.session.get(UsuarioEntity, rpg.mestre.id),
+                    jogadores = [
+                         database.session.get(UsuarioEntity, usuario.id) 
+                         for usuario in rpg.jogadores
+                    ],
+                    generos = [
+                        database.session.get(GeneroEntity, genero.id) 
+                         for genero in rpg.generos
+                    ]
+                )
+                database.session.add(entity)
+                database.session.commit()
+                return Rpg.from_entity(entity)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
+
+    @classmethod
+    def find_all(cls)->List[Rpg]:
+        with DBConnectionHandler() as database:
+            try:
+                rpgs = (
+                    Rpg.from_entity(entity)
+                    for entity in 
+                    database.session.scalars(
+                                select(RpgEntity)
+                            ).all()
+                )
+                return rpgs
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
+
+    @classmethod
+    def delete_by_id(cls, id: int) -> Rpg:
+        with DBConnectionHandler() as database:
+            try:
+                entity = database.session.get(RpgEntity, id)
+                if entity is None:
+                    return None
+                database.session.delete(entity)
+                database.session.commit()
+                return Rpg.from_entity(entity)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
+
+    @classmethod
+    def find_by_id(cls, id: int) -> Rpg:
+        with DBConnectionHandler() as database:
+            try:
+                entity = (
+                    database.session.get(RpgEntity, id)
+                )
+                if entity is None:
+                    return None
+                return Rpg.from_entity(entity)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
+
+    @classmethod
+    def update(cls, rpg: Rpg) -> Rpg:
+        with DBConnectionHandler() as database:
+            try:
+                entity: RpgEntity = database.session.get(RpgEntity, rpg.id)
+                if entity is None:
+                    return None
+                if rpg.nome:
+                    entity.nome = rpg.nome
+                if rpg.descricao:
+                    entity.descricao = rpg.descricao
+                if rpg.mestre:
+                    entity.mestre = database.session.get(UsuarioEntity, rpg.mestre.id)
+                if rpg.jogadores:
+                    entity.jogadores = [
+                         database.session.get(UsuarioEntity, usuario.id) 
+                         for usuario in rpg.jogadores
+                    ]
+                if rpg.generos:
+                    entity.generos = [
+                         database.session.get(GeneroEntity, genero.id) 
+                         for genero in rpg.generos
+                    ]
+                database.session.commit()
+                return Rpg.from_entity(entity)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception

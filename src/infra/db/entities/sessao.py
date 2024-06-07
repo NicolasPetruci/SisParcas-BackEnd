@@ -14,7 +14,7 @@ class SessaoEntity(Base):
     descricao = Column(String)
     data_hora = Column(DateTime)
     temporada = Column(Integer)
-    numero_sessao = Column(Integer)
+    numero = Column(Integer)
     
     id_rpg = Column(Integer, ForeignKey("rpg.id"))
     rpg = relationship("RpgEntity", back_populates="sessoes", lazy="joined")

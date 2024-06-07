@@ -1,5 +1,6 @@
 from typing import List
-from src.domain.models import Usuario, Genero
+from .usuario import Usuario
+from .genero import Genero
 
 class Rpg:
     

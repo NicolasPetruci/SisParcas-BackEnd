@@ -11,7 +11,7 @@ class Sessao:
         descricao: str,
         data_hora: datetime,
         temporada: int,
-        numero_sessao: int,
+        numero: int,
         rpg: Rpg,
         jogadores: List[Usuario],
     ):
@@ -20,7 +20,7 @@ class Sessao:
         self.__descricao = descricao
         self.__data_hora = data_hora
         self.__temporada = temporada
-        self.__numero_sessao = numero_sessao
+        self.__numero = numero
         self.__rpg = rpg
         self.__jogadores = jogadores
     
@@ -40,8 +40,8 @@ class Sessao:
     def temporada(self):
         return self.__temporada
     @property
-    def numero_sessao(self):
-        return self.__numero_sessao
+    def numero(self):
+        return self.__numero
     @property
     def rpg(self):
         return self.__rpg
@@ -59,8 +59,8 @@ class Sessao:
         self.__data_hora = data_hora
     def set_temporada(self, temporada):
         self.__temporada = temporada
-    def set_numero_sessao(self, numero_sessao):
-        self.__numero_sessao = numero_sessao
+    def set_numero(self, numero):
+        self.__numero = numero
     def set_rpg(self, rpg):
         self.__rpg = rpg
     def set_jogadores(self, jogadores):
@@ -74,7 +74,7 @@ class Sessao:
             descricao,
             data_hora,
             temporada,
-            numero_sessao,
+            numero,
             rpg,
             jogadores,            
         )
@@ -86,7 +86,7 @@ class Sessao:
             "descricao": self.__descricao,
             "data_hora": self.__data_hora,
             "temporada": self.__temporada,
-            "numero_sessao": self.__numero_sessao,
+            "numero": self.__numero,
             "rpg": self.__rpg,
             "jogadores": self.__jogadores,
         }
