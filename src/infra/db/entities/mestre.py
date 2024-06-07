@@ -12,10 +12,8 @@ class MestreEntity(Base):
     ativo = Column(Boolean)
     id_usuario = Column(Integer, ForeignKey("usuario.id"))
     usuario = relationship(
-                            "MestreEntity",
-                            uselist=False,
-                            backref=backref("mestre", cascade="all,delete", uselist=False),
-                            lazy="joined",
+                            "UsuarioEntity",
+                            backref=backref("mestre", cascade="all,delete", uselist=False)
                     )
     rpgs = relationship(
                         "RPGEntity", 

@@ -28,4 +28,7 @@ class RPGEntity(Base):
                             back_populates="rpgs",
                             lazy="selectin"
                     )
+    sessoes = relationship("SessaoEntity", 
+                        back_populates="rpg",
+                )
   
