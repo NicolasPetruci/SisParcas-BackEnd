@@ -17,12 +17,13 @@ from src.main.composers.evento import cadastrar_evento_composer,\
                                      excluir_evento_composer, \
                                      inscrever_composer, \
                                      desinscrever_composer
-
+from flask_cors import cross_origin
 from src.errors import handle_errors
 
 blueprint = Blueprint("evento_routes", __name__)
 
 @blueprint.route("/evento/tipo/cadastrar", methods=["POST"])
+@cross_origin()
 def cadastrar_tipo_evento():
     http_response = None
 
@@ -34,6 +35,7 @@ def cadastrar_tipo_evento():
     return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/evento/tipo", methods=["GET"])
+@cross_origin()
 def buscar_tipo_eventos():
     http_response = None
     try:
@@ -44,6 +46,7 @@ def buscar_tipo_eventos():
     return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/evento/tipo/excluir", methods=["DELETE"])
+@cross_origin()
 def excluir_tipo_evento():
     http_response = None
     try:
@@ -54,6 +57,7 @@ def excluir_tipo_evento():
     return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/evento/cadastrar", methods=["POST"])
+@cross_origin()
 def cadastrar_evento():
     http_response = None
 
@@ -65,6 +69,7 @@ def cadastrar_evento():
     return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/evento", methods=["GET"])
+@cross_origin()
 def buscar_eventos():
     http_response = None
     try:
@@ -78,6 +83,7 @@ def buscar_eventos():
     return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/evento/atualizar", methods=["PUT"])
+@cross_origin()
 def atualizar_evento():
     http_response = None
 
@@ -89,6 +95,7 @@ def atualizar_evento():
     return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/evento/excluir", methods=["DELETE"])
+@cross_origin()
 def excluir_evento():
     http_response = None
     try:
@@ -100,6 +107,7 @@ def excluir_evento():
 
 
 @blueprint.route("/evento/inscrever", methods=["PUT"])
+@cross_origin()
 def inscrever_evento():
     http_response = None
     try:
@@ -111,6 +119,7 @@ def inscrever_evento():
 
 
 @blueprint.route("/evento/desinscrever", methods=["PUT"])
+@cross_origin()
 def desinscrever_evento():
     http_response = None
     try:

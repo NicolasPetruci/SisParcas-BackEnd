@@ -6,12 +6,13 @@ from src.main.composers.cargo import cadastrar_cargo_composer,\
                                      buscar_cargo_por_id_composer,\
                                      atualizar_cargo_composer, \
                                      excluir_cargo_composer
-
+from flask_cors import cross_origin
 from src.errors import handle_errors
 
 blueprint = Blueprint("cargo_routes", __name__)
 
 @blueprint.route("/cargo/cadastrar", methods=["POST"])
+@cross_origin()
 def cadastrar_cargo():
     http_response = None
 
@@ -23,6 +24,7 @@ def cadastrar_cargo():
     return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/cargo", methods=["GET"])
+@cross_origin()
 def buscar_cargos():
     http_response = None
     try:
@@ -36,6 +38,7 @@ def buscar_cargos():
     return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/cargo/atualizar", methods=["PUT"])
+@cross_origin()
 def atualizar_cargo():
     http_response = None
 
@@ -47,6 +50,7 @@ def atualizar_cargo():
     return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/cargo/excluir", methods=["DELETE"])
+@cross_origin()
 def excluir_cargo():
     http_response = None
     try:

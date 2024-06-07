@@ -36,9 +36,6 @@ def request_adapter_no_token(request: FlaskRequest, controller: Callable) -> Htt
         )
 
         http_response = controller(http_request)
-        http_response.headers.add("Access-Control-Allow-Origin", "*")
-        http_response.headers.add("Access-Control-Allow-Headers", "*")
-        http_response.headers.add("Access-Control-Allow-Methods", "*")
         return http_response
     except Exception as exception:
         return handle_errors(exception)
