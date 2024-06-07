@@ -13,7 +13,7 @@ class ManterEventoController():
         response = self.__use_case.buscar_eventos()
         return HttpResponse(
             status_code=200,
-            body = {"data": response}
+            body = response
         )
 
     @classmethod
@@ -32,7 +32,7 @@ class ManterEventoController():
 
         return HttpResponse(
             status_code=200,
-            body = { "data": response }
+            body = response 
         )
 
     @classmethod
@@ -40,7 +40,7 @@ class ManterEventoController():
         response = self.__use_case.buscar_evento_por_id(request.query_params["id"])
         return HttpResponse (
             status_code=200,
-            body = {"data": response}
+            body = response
         )
     
     @classmethod
@@ -67,7 +67,7 @@ class ManterEventoController():
         response = self.__use_case.atualizar(form)
         return HttpResponse (
             status_code=200,
-            body = {"data": response}
+            body = response
         )
     
     @classmethod
@@ -75,5 +75,5 @@ class ManterEventoController():
         response = self.__use_case.excluir(request.query_params["id"])
         return HttpResponse (
             status_code=200,
-            body = {"data": response}
+            body = response
         )

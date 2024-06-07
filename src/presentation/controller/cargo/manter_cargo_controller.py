@@ -13,7 +13,7 @@ class ManterCargoController():
         response = self.__use_case.buscar_cargos()
         return HttpResponse(
             status_code=200,
-            body = {"data": response}
+            body = response
         )
 
     @classmethod
@@ -23,7 +23,7 @@ class ManterCargoController():
 
         return HttpResponse(
             status_code=200,
-            body = { "data": response }
+            body = response 
         )
 
     @classmethod
@@ -31,7 +31,7 @@ class ManterCargoController():
         response = self.__use_case.buscar_cargo_por_id(request.query_params["id"])
         return HttpResponse (
             status_code=200,
-            body = {"data": response}
+            body = response
         )
     
     @classmethod
@@ -40,7 +40,7 @@ class ManterCargoController():
         response = self.__use_case.atualizar(form)
         return HttpResponse (
             status_code=200,
-            body = {"data": response}
+            body = response
         )
     
     @classmethod
@@ -48,5 +48,5 @@ class ManterCargoController():
         response = self.__use_case.excluir(request.query_params["id"])
         return HttpResponse (
             status_code=200,
-            body = {"data": response}
+            body = response
         )

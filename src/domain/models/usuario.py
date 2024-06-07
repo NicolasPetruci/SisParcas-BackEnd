@@ -5,13 +5,13 @@ class Usuario():
 
     def __init__(
         self,
-        id: int,
-        nome: str,
-        email: str,
-        telefone: str,
-        senha: str,
-        aniversario: date,
-        cargo: Cargo,
+        id: int = None,
+        nome: str = None,
+        email: str = None,
+        telefone: str = None,
+        senha: str = None,
+        aniversario: date = None,
+        cargo: Cargo = None,
     ) -> None:
         self.__id = id
         self.__nome = nome

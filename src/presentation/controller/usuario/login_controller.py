@@ -15,5 +15,5 @@ class LoginController():
 
         return HttpResponse (
             status_code=200,
-            body = {"data": response_body}
+            body = response_body
         )

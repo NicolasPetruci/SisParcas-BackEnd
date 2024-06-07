@@ -11,21 +11,21 @@ class InscricaoEventoController():
     @classmethod
     def inscrever(self, request: HttpRequest) -> HttpResponse: 
         response = self.__use_case.inscrever(
-            request.query_params["idUsuario"],
-            request.query_params["idEvento"]
+            request.query_params["id_usuario"],
+            request.query_params["id_evento"]
             )
         return HttpResponse (
             status_code=200,
-            body = response,
+            body = response
         )
 
     @classmethod
     def desinscrever(self, request: HttpRequest) -> HttpResponse: 
         response = self.__use_case.desinscrever(
-            request.query_params["idUsuario"],
-            request.query_params["idEvento"]
+            request.query_params["id_usuario"],
+            request.query_params["id_rpg"]
             )
         return HttpResponse (
             status_code=200,
-            body = response,
+            body = response
         )

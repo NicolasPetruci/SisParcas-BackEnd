@@ -13,7 +13,7 @@ class ManterUsuarioController():
         response = self.__use_case.buscar_usuarios()
         return HttpResponse(
             status_code=200,
-            body = {"data": response}
+            body = response
         )
 
     @classmethod
@@ -34,7 +34,7 @@ class ManterUsuarioController():
 
         return HttpResponse(
             status_code=200,
-            body = { "data": response }
+            body = response
         )
 
     @classmethod
@@ -42,7 +42,7 @@ class ManterUsuarioController():
         response = self.__use_case.buscar_usuario_por_id(request.query_params["id"])
         return HttpResponse (
             status_code=200,
-            body = {"data": response}
+            body = response
         )
     
     @classmethod
@@ -59,7 +59,7 @@ class ManterUsuarioController():
         response = self.__use_case.atualizar(form)
         return HttpResponse (
             status_code=200,
-            body = {"data": response}
+            body = response
         )
     
     @classmethod
@@ -67,5 +67,5 @@ class ManterUsuarioController():
         response = self.__use_case.excluir(request.query_params["id"])
         return HttpResponse (
             status_code=200,
-            body = {"data": response}
+            body = response
         )

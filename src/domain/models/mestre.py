@@ -27,16 +27,20 @@ class Mestre:
 
     def set_id(self, id):
         self.__id = id
-
+        return self
+        
     def set_ativo(self, ativo):
         self.__ativo = ativo
-
+        return self
+        
     def set_usuario(self, usuario):
         self.__usuario = usuario
-
+        return self
+        
     def set_rpgs(self, rpgs):
         self.__rpgs = rpgs
-
+        return self
+        
     @staticmethod
     def from_entity(entity):
         self.__id = id
