@@ -6,14 +6,14 @@ class Sessao:
 
     def __init__(
         self,
-        id: int,
-        nome: str,
-        descricao: str,
-        data_hora: datetime,
-        temporada: int,
-        numero: int,
-        rpg: RPG,
-        jogadores: List[Usuario],
+        id: int = None,
+        nome: str = None,
+        descricao: str = None,
+        data_hora: datetime = None,
+        temporada: int = None,
+        numero: int = None,
+        rpg: RPG = None,
+        jogadores: List[Usuario] = [],
     ):
         self.__id = id
         self.__nome = nome

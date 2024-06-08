@@ -1,18 +1,18 @@
-from src.domain.use_cases.evento import InscricaoEventoInterface
-from src.domain.models import Evento
+from src.domain.use_cases.rpg import InscricaoRPGInterface
+from src.domain.models import RPG
 from src.presentation.http_types import HttpRequest, HttpResponse
 
-class InscricaoEventoController():
+class InscricaoRPGController():
 
     @classmethod
-    def __init__(self, use_case: InscricaoEventoInterface):
+    def __init__(self, use_case: InscricaoRPGInterface):
         self.__use_case = use_case
     
     @classmethod
     def inscrever(self, request: HttpRequest) -> HttpResponse: 
         response = self.__use_case.inscrever(
             request.query_params["id_usuario"],
-            request.query_params["id_evento"]
+            request.query_params["id_rpg"]
             )
         return HttpResponse (
             status_code=200,
