@@ -7,11 +7,7 @@ from src.errors import handle_errors, HttpError
 def get_token(request):
     token = None
     raw_token = ""
-    if request.headers.get("token"):
-        raw_token = request.headers.get("token")
-    elif request.headers.get("Token"):
-        raw_token = request.headers.get("Token")
-    elif request.headers.get("Authorization"):
+    if request.headers.get("Authorization"):
         raw_token = request.headers.get("Authorization").split()[1]
     else: 
         raise HttpError(HttpError.error_401())
@@ -50,7 +46,7 @@ def request_adapter_dono(request: FlaskRequest, controller: Callable) -> HttpRes
 
     token = get_token(request)
 
-    if(token.cargo != "DONO"):
+    if(token.cargo not in ["DONO"]):
         raise HttpError(HttpError.error_401())
     
     return request_adapter_no_token(request, controller)
@@ -59,7 +55,16 @@ def request_adapter_adm(request: FlaskRequest, controller: Callable) -> HttpResp
 
     token = get_token(request)
 
-    if(token.cargo == "DEFAULT"):
+    if(token.cargo not in ["DONO", "ADM"]):
         raise HttpError(HttpError.error_401())
     
+    return request_adapter_no_token(request, controller)
+
+    
+def request_adapter_mestre(request: FlaskRequest, controller: Callable) -> HttpResponse:
+
+    token = get_token(request)
+
+    if(token.cargo not in ["MESTRE", "DONO", "ADM"]):
+        raise HttpError(HttpError.error_401())
     return request_adapter_no_token(request, controller)
