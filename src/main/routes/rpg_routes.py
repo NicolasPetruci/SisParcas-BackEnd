@@ -30,6 +30,33 @@ from src.errors import handle_errors
 
 blueprint = Blueprint("rpg_routes", __name__)
 
+
+
+@blueprint.route("/rpg/mestre/deferir", methods=["PUT"])
+@cross_origin()
+def deferir_mestre():
+    http_response = None
+
+    try:
+        http_response = request_adapter(request, deferir_mestre_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code
+
+
+@blueprint.route("/rpg/mestre/indeferir", methods=["PUT"])
+@cross_origin()
+def indeferir_mestre():
+    http_response = None
+
+    try:
+        http_response = request_adapter(request, indeferir_mestre_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code
+
 @blueprint.route("/rpg/mestre/cadastrar", methods=["POST"])
 @cross_origin()
 def cadastrar_mestre():

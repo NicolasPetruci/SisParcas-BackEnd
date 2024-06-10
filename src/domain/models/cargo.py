@@ -1,7 +1,7 @@
 from typing import Dict
 class Cargo():
 
-    def __init__(self, id: int, descricao: str):
+    def __init__(self, id: int = None, descricao: str = None):
         self.__id = id
         self.__descricao = descricao
     

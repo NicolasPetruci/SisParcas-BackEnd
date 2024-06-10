@@ -1,4 +1,4 @@
-from src.domain.models import Usuario
+from src.domain.models import Usuario, Cargo
 from src.infra.db.entities import UsuarioEntity, CargoEntity
 from src.infra.db.config import DBConnectionHandler
 from src.data.interfaces import UsuarioRepositoryInterface
@@ -82,7 +82,7 @@ class UsuarioRepository(UsuarioRepositoryInterface):
                 entity.aniversario = usuario.aniversario
                 entity.email = usuario.email
                 entity.telefone = usuario.telefone
-                entity.cargo = usuario.cargo
+                entity.cargo = database.session.get(CargoEntity, usuario.cargo.id)
                 database.session.commit()
                 return Usuario.from_entity(entity)
             except Exception as exception:

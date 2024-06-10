@@ -1,4 +1,5 @@
-
+from .usuario import Usuario
+from .rpg import RPG
 class Mestre:
     def __init__(
         self,
@@ -13,16 +14,16 @@ class Mestre:
         self.__rpgs = rpgs   
 
     @property
-    def id(id):
+    def id(self):
         return self.__id
     @property
-    def ativo(ativo):
+    def ativo(self):
         return self.__ativo
     @property
-    def usuario(usuario):
+    def usuario(self):
         return self.__usuario
     @property
-    def rpgs(rpgs):
+    def rpgs(self):
         return self.__rpgs
 
     def set_id(self, id):
@@ -43,15 +44,17 @@ class Mestre:
         
     @staticmethod
     def from_entity(entity):
-        self.__id = id
-        self.__ativo = ativo
-        self.__usuario = usuario
-        self.__rpgs = rpgs
+        return Mestre(
+            id = entity.id,
+            ativo = entity.ativo,
+            usuario = Usuario.from_entity(entity.usuario),
+            rpgs = [RPG.from_entity(rpg) for rpg in entity.rpgs],
+        )
 
     def to_json(self):
         return {
             "id": self.id,
             "ativo": self.ativo,
-            "usuario": self.usuario,
-            "rpgs": self.rpgs,
+            "usuario": self.usuario.to_json(),
+            "rpgs": [rpg.to_json() for rpg in self.rpgs],
         }

@@ -10,7 +10,7 @@ class InscricaoMestreController():
     
     @classmethod
     def deferir(self, request: HttpRequest) -> HttpResponse: 
-        response = self.__use_case.deferir(request.query_params["id_usuario"], request.query_params["id_mestre"])
+        response = self.__use_case.deferir(request.query_params["id_mestre"])
         return HttpResponse(
             status_code=200,
             body = response
@@ -18,7 +18,7 @@ class InscricaoMestreController():
 
     @classmethod
     def indeferir(self, request: HttpRequest) -> HttpResponse: 
-        response = self.__use_case.indeferir(request.query_params["id_usuario"], request.query_params["id_mestre"])
+        response = self.__use_case.indeferir(request.query_params["id_mestre"])
         return HttpResponse(
             status_code=200,
             body = response

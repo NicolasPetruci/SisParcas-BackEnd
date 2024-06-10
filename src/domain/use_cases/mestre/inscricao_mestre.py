@@ -5,9 +5,6 @@ from typing import List, Dict
 class InscricaoMestreInterface(ABC):
 
     @abstractmethod
-    def inscrever(self, id_usuario: int, id_rpg: int) -> Dict: pass
-
-    @abstractmethod
     def deferir(self, id_usuario: int, id_rpg: int) -> Dict: pass
 
     @abstractmethod

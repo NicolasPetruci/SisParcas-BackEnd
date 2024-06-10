@@ -21,17 +21,8 @@ class ManterMestre(ManterMestreInterface):
 
     @classmethod
     def cadastrar(self, mestre: Mestre)->Dict:
-        novo_mestre: Mestre = Mestre(
-            None, 
-            mestre.nome,
-            mestre.email,
-            mestre.telefone,
-            encrypt_password(mestre.senha),
-            mestre.aniversario,
-            mestre.cargo
-            )
         return {
-            "mestre": self.__repository.insert(novo_mestre).to_json(),
+            "mestre": self.__repository.insert(mestre).to_json(),
             "message": "Mestre cadastrado com sucesso.",
         }
     
