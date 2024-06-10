@@ -17,4 +17,5 @@ class HttpRequest:
         self.query_params = query_params
         self.path_params = path_params
         self.url = url
+        self.payload = payload
         self.ipv4 = ipv4

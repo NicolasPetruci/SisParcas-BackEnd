@@ -18,7 +18,7 @@ class ManterMestreController():
 
     @classmethod
     def cadastrar(self, request: HttpRequest) -> HttpResponse:
-        form = Mestre().set_ativo(request.body["ativo"]).set_usuario(Usuario(id=request.body["usuario"]["id"]))
+        form = Mestre().set_ativo(request.body["ativo"]).set_usuario(Usuario(id=request.payload.id))
         response = self.__use_case.cadastrar(form)
 
         return HttpResponse(

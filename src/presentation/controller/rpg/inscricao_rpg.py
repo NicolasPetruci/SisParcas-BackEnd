@@ -11,7 +11,7 @@ class InscricaoRPGController():
     @classmethod
     def inscrever(self, request: HttpRequest) -> HttpResponse: 
         response = self.__use_case.inscrever(
-            request.query_params["id_usuario"],
+            request.payload.id,
             request.query_params["id_rpg"]
             )
         return HttpResponse (
@@ -22,7 +22,7 @@ class InscricaoRPGController():
     @classmethod
     def desinscrever(self, request: HttpRequest) -> HttpResponse: 
         response = self.__use_case.desinscrever(
-            request.query_params["id_usuario"],
+            request.payload.id,
             request.query_params["id_rpg"]
             )
         return HttpResponse (

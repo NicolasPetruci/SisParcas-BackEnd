@@ -23,6 +23,8 @@ class InscricaoRPG(InscricaoRPGInterface):
         usuario: Usuario = self.__usuario_repository.find_by_id(id_usuario)
         if usuario is None:
             raise HttpError(HttpError.error_404("Usuario não encontrado."))
+        if usuario.id == rpg.mestre.usuario.id:
+            raise HttpError(HttpError.error_400("O mestre não pode ser jogador."))
         if usuario in rpg.jogadores:
             raise HttpError(HttpError.error_400("Jogador já inscrito."))
         rpg.adicionar_jogador(usuario)
@@ -40,6 +42,8 @@ class InscricaoRPG(InscricaoRPGInterface):
         usuario: Usuario = self.__usuario_repository.find_by_id(id_usuario)
         if usuario is None:
             raise HttpError(HttpError.error_404("Usuario não encontrado."))
+        if usuario.id == rpg.mestre.usuario.id:
+            raise HttpError(HttpError.error_400("O mestre não pode ser jogador."))
         if usuario not in rpg.jogadores:
             raise HttpError(HttpError.error_400("Jogador não está inscrito."))
         rpg.remover_jogador(usuario)

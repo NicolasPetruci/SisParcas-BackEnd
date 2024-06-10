@@ -23,8 +23,8 @@ class ManterRPGController():
             0,
             request.body["nome"], 
             request.body["descricao"],
-            mestre = Mestre(id = request.body["mestre"]["id"]),
-            generos = (Genero(genero["id"], genero["descricao"]) for genero in request.body["generos"])
+            mestre = Mestre(usuario=Usuario(id=request.payload.id)),
+            generos = (Genero(id=genero["id"]) for genero in request.body["generos"])
         )
         response = self.__use_case.cadastrar(form)
 

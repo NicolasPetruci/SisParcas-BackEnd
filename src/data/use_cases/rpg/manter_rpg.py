@@ -1,14 +1,15 @@
 from src.domain.models import RPG
 from src.domain.use_cases.rpg import ManterRPGInterface
-from src.data.interfaces import RPGRepositoryInterface
+from src.data.interfaces import RPGRepositoryInterface, MestreRepositoryInterface
 from src.errors import HttpError
 from typing import Dict, List
 
 class ManterRPG(ManterRPGInterface):
 
     @classmethod
-    def __init__(self, repository: RPGRepositoryInterface):
+    def __init__(self, repository: RPGRepositoryInterface, mestre_repository: MestreRepositoryInterface):
         self.__repository = repository
+        self.__mestre_repository = mestre_repository
 
     @classmethod
     def buscar_rpg_por_id(self, id: int) -> Dict:
@@ -19,11 +20,12 @@ class ManterRPG(ManterRPGInterface):
 
     @classmethod
     def cadastrar(self, rpg: RPG)->Dict:
+        mestre = self.__mestre_repository.find_by_id_usuario(rpg.mestre.id)
         novo_rpg: RPG = RPG(
             None, 
             rpg.nome,
             rpg.descricao,
-            rpg.mestre,
+            mestre,
             generos = rpg.generos,
             )
         return {

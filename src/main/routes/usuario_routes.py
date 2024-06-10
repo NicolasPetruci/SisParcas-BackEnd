@@ -6,7 +6,8 @@ from src.main.composers.usuario import cadastrar_usuario_composer,\
                                      buscar_usuario_por_id_composer,\
                                      atualizar_usuario_composer, \
                                      excluir_usuario_composer, \
-                                     login_composer
+                                     login_composer, \
+                                     buscar_cargos_usuario_composer
 from flask_cors import cross_origin
 from src.errors import handle_errors
 
@@ -43,6 +44,19 @@ def buscar_usuarios():
 
     try:
         http_response = request_adapter(request, buscar_usuarios_composer())
+    except Exception as e:
+        http_response = handle_errors(e)
+    
+    return jsonify(http_response.body), http_response.status_code
+
+
+@blueprint.route("/usuario/cargos", methods=["GET"])
+@cross_origin()
+def buscar_cargos_usuario():
+    http_response = None
+
+    try:
+        http_response = request_adapter(request, buscar_cargos_usuario_composer())
     except Exception as e:
         http_response = handle_errors(e)
     

@@ -75,3 +75,19 @@ class MestreRepository(MestreRepositoryInterface):
             except Exception as exception:
                 database.session.rollback()
                 raise exception
+            
+    @classmethod
+    def find_by_id_usuario(cls, id_usuario: int) -> Mestre:
+        with DBConnectionHandler() as database:
+            try:
+                entity: MestreEntity = database.session.scalars(
+                    select(MestreEntity)
+                    .filter_by(id_usaurio = id_usuario)
+                    .limit(1)
+                ).first()
+                if entity is None:
+                    return None
+                return Mestre.from_entity(entity)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
