@@ -4,5 +4,5 @@ from .manter_mestre_composer import cadastrar_mestre_composer,\
                         atualizar_mestre_composer,\
                         excluir_mestre_composer
 
-from .inscricao_mestre_composer import deferir_composer, \
-                                       indeferir_composer
+from .inscricao_mestre_composer import deferir_mestre_composer, \
+                                       indeferir_mestre_composer

@@ -17,7 +17,7 @@ from src.main.composers.rpg import cadastrar_rpg_composer,\
                                      excluir_rpg_composer, \
                                      inscrever_composer, \
                                      desinscrever_composer
-from .src.main.composers.mestre import cadastrar_mestre_composer,\
+from src.main.composers.mestre import cadastrar_mestre_composer,\
                                         buscar_mestres_composer, \
                                         atualizar_mestre_composer, \
                                         buscar_mestre_por_id_composer, \

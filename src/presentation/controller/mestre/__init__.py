@@ -1,0 +1,2 @@
+from .inscricao_mestre import InscricaoMestreController
+from .manter_mestre import ManterMestreController

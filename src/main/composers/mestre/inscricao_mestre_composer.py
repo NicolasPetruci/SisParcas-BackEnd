@@ -10,11 +10,11 @@ def compose_methods():
 
     return controller
 
-def deferir_composer():
+def deferir_mestre_composer():
     controller = compose_methods()
     return controller.deferir
 
 
-def indeferir_composer():
+def indeferir_mestre_composer():
     controller = compose_methods()
     return controller.indeferir
