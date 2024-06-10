@@ -13,8 +13,8 @@ class BuscarCargosUsuario(BuscarCargosUsuarioInterface):
 
     
     @classmethod
-    def buscar_cargos_usuario(self, id: int) -> Dict:
+    def buscar_cargos_usuario(self, id: int) -> List:
         usuario = self.__repository.find_by_id(id)
         if usuario is None:
             raise HttpError(HttpError.error_404("Usuario não encontrado."))
-        return [cargo.to_json() for cargo in usuario.cargos]
+        return [cargo.descricao for cargo in usuario.cargos]
