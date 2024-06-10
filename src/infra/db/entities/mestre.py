@@ -10,10 +10,11 @@ class MestreEntity(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     ativo = Column(Boolean)
-    id_usuario = Column(Integer, ForeignKey("usuario.id"))
+    id_usuario = Column(Integer, ForeignKey("usuario.id"), nullable=False)
     usuario = relationship(
                             "UsuarioEntity",
-                            backref=backref("mestre", cascade="all,delete", uselist=False)
+                            backref=backref("mestre", cascade="all,delete", uselist=False),
+                            lazy="joined"
                     )
     rpgs = relationship(
                         "RPGEntity", 

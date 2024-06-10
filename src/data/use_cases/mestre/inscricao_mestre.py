@@ -22,10 +22,10 @@ class InscricaoMestre(InscricaoMestreInterface):
             raise HttpError(HttpError.error_404("Mestre não encontrado."))
         if mestre.ativo:
             raise HttpError(HttpError.error_400("Inscrição já foi deferida."))
-        mestre.set_ativo(True)
         usuario: Usuario = self.__usuario_repository.find_by_id(mestre.usuario.id)
-        usuario.set_cargo(Cargo(id = 3))
+        usuario.cargos.append(Cargo(id = 3))
         self.__usuario_repository.update(usuario)
+        mestre.set_ativo(True)
         mestre_atualizado = self.__repository.update(mestre)
         return {
             "mestre": mestre_atualizado.to_json(),
@@ -39,6 +39,9 @@ class InscricaoMestre(InscricaoMestreInterface):
             raise HttpError(HttpError.error_404("Mestre não encontrado."))
         if not mestre.ativo:
             raise HttpError(HttpError.error_400("Inscrição já foi indeferida."))
+        usuario: Usuario = self.__usuario_repository.find_by_id(mestre.usuario.id)
+        usuario.cargos.remove(Cargo(id = 3))
+        self.__usuario_repository.update(usuario)
         mestre.set_ativo(False)
         mestre_atualizado = self.__repository.update(mestre)
         return {

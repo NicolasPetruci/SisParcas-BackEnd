@@ -14,9 +14,9 @@ def get_token(request):
     token = decode_token(raw_token)
     if token is None:
         raise HttpError(HttpError.error_401())
-    return Payload(token["username"], token["cargo"], token["id"])
+    return Payload(token["username"], token["cargos"], token["id"])
    
-def request_adapter_no_token(request: FlaskRequest, controller: Callable) -> HttpResponse:
+def request_adapter_no_token(request: FlaskRequest, controller: Callable, token=None) -> HttpResponse:
 
     body = None
     try:
@@ -28,6 +28,7 @@ def request_adapter_no_token(request: FlaskRequest, controller: Callable) -> Htt
             headers=request.headers,
             query_params=request.args,
             path_params=request.view_args,
+            payload=token,
             url=request.full_path
         )
 
@@ -40,31 +41,31 @@ def request_adapter(request: FlaskRequest, controller: Callable) -> HttpResponse
 
     token = get_token(request)
     
-    return request_adapter_no_token(request, controller)
+    return request_adapter_no_token(request, controller, token = token)
 
 def request_adapter_dono(request: FlaskRequest, controller: Callable) -> HttpResponse:
 
     token = get_token(request)
 
-    if(token.cargo not in ["DONO"]):
+    if("DONO" not in token.cargos):
         raise HttpError(HttpError.error_401())
     
-    return request_adapter_no_token(request, controller)
+    return request_adapter_no_token(request, controller, token = token)
     
 def request_adapter_adm(request: FlaskRequest, controller: Callable) -> HttpResponse:
 
     token = get_token(request)
 
-    if(token.cargo not in ["DONO", "ADM"]):
+    if("ADM" not in token.cargos):
         raise HttpError(HttpError.error_401())
     
-    return request_adapter_no_token(request, controller)
+    return request_adapter_no_token(request, controller, token = token)
 
     
 def request_adapter_mestre(request: FlaskRequest, controller: Callable) -> HttpResponse:
 
     token = get_token(request)
 
-    if(token.cargo not in ["MESTRE", "DONO", "ADM"]):
+    if("MESTRE" not in token.cargos):
         raise HttpError(HttpError.error_401())
-    return request_adapter_no_token(request, controller)
+    return request_adapter_no_token(request, controller, token = token)

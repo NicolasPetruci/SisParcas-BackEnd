@@ -11,7 +11,8 @@ class GeneroEntity(Base):
     descricao = Column(String)
 
     rpgs = relationship("RPGEntity", 
-                            secondary = genero_rpg_association,
-                            back_populates="generos",
-                            lazy="selectin",
-                    )
+                        secondary = genero_rpg_association,
+                        back_populates="generos",
+                        cascade="all,delete",
+                        lazy="selectin",
+                        )

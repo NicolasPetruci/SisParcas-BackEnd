@@ -1,5 +1,5 @@
 from src.domain.models import RPG
-from src.infra.db.entities import RPGEntity, UsuarioEntity, GeneroEntity
+from src.infra.db.entities import RPGEntity, UsuarioEntity, GeneroEntity, MestreEntity
 from src.infra.db.config import DBConnectionHandler
 from src.data.interfaces import RPGRepositoryInterface
 from sqlalchemy import select
@@ -14,7 +14,7 @@ class RPGRepository(RPGRepositoryInterface):
                 entity = RPGEntity(
                     nome = rpg.nome,
                     descricao = rpg.descricao,
-                    mestre = database.session.get(UsuarioEntity, rpg.mestre.id),
+                    mestre = database.session.get(MestreEntity, rpg.mestre.id),
                     jogadores = [
                          database.session.get(UsuarioEntity, usuario.id) 
                          for usuario in rpg.jogadores
@@ -87,7 +87,7 @@ class RPGRepository(RPGRepositoryInterface):
                 if rpg.descricao:
                     entity.descricao = rpg.descricao
                 if rpg.mestre:
-                    entity.mestre = database.session.get(UsuarioEntity, rpg.mestre.id)
+                    entity.mestre = database.session.get(MestreEntity, rpg.mestre.id)
                 if rpg.jogadores:
                     entity.jogadores = [
                          database.session.get(UsuarioEntity, usuario.id) 

@@ -1,6 +1,7 @@
 from typing import List
 from .usuario import Usuario
 from .genero import Genero
+from importlib import import_module
 
 class RPG:
     
@@ -62,27 +63,47 @@ class RPG:
     
 
     def remover_jogador(self, jogador):
-        self.__jogadores.reemove(jogador)
+        self.__jogadores.remove(jogador)
 
 
     @staticmethod
     def from_entity(entity):
+        mestre_class = import_module('src.domain.models')
         return RPG(
             entity.id,
             entity.nome,
             entity.descricao,
-            entity.mestre,
-            entity.jogadores,
-            entity.generos,
+            mestre_class.Mestre.from_entity_sem_rpg(entity.mestre),
+            [Usuario.from_entity(jogador) for jogador in entity.jogadores],
+            [Genero.from_entity(genero) for genero in entity.generos],
         )
-    
+    @staticmethod
+    def from_entity_sem_mestre(entity):
+        mestre_class = import_module('src.domain.models')
+        return RPG(
+            entity.id,
+            entity.nome,
+            entity.descricao,
+            [Usuario.from_entity(jogador) for jogador in entity.jogadores],
+            [Genero.from_entity(genero) for genero in entity.generos],
+        )
+
     def to_json(self):
         return {
-            "id": self.__id,
-            "nome": self.__nome,
-            "descricao": self.__descricao,
-            "mestre": self.__mestre.to_json(),
-            "jogadores": [o.to_json() for o in self.__jogadores],
-            "generos": [o.to_json() for o in self.__generos],
+            "id": self.id,
+            "nome": self.nome,
+            "descricao": self.descricao,
+            "mestre": self.mestre.to_json_sem_rpg(),
+            "jogadores": [o.to_json() for o in self.jogadores],
+            "generos": [o.to_json() for o in self.generos],
+        }
+    
+    def to_json_sem_mestre(self):
+        return {
+            "id": self.id,
+            "nome": self.nome,
+            "descricao": self.descricao,
+            "jogadores": [o.to_json() for o in self.jogadores],
+            "generos": [o.to_json() for o in self.generos],
         }
     

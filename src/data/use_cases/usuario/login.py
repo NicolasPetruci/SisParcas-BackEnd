@@ -23,7 +23,7 @@ class Login(LoginInterface):
             usuario.email == loginInfo.email and
             check_encrypted_password(loginInfo.senha, usuario.senha)
         ):
-            payload = Payload(usuario.email, usuario.cargo.descricao, usuario.id)
+            payload = Payload(usuario.email, usuario.cargos, usuario.id)
             token = encode_token(payload)
             return { "token": token }
         else:

@@ -1,5 +1,6 @@
 from .usuario import Usuario
 from .rpg import RPG
+
 class Mestre:
     def __init__(
         self,
@@ -48,13 +49,26 @@ class Mestre:
             id = entity.id,
             ativo = entity.ativo,
             usuario = Usuario.from_entity(entity.usuario),
-            rpgs = [RPG.from_entity(rpg) for rpg in entity.rpgs],
+            rpgs = [RPG.from_entity_sem_mestre(rpg) for rpg in entity.rpgs],
         )
 
+    @staticmethod
+    def from_entity_sem_rpg(entity):
+        return Mestre(
+            id = entity.id,
+            ativo = entity.ativo,
+            usuario = Usuario.from_entity(entity.usuario),
+        )
     def to_json(self):
         return {
             "id": self.id,
             "ativo": self.ativo,
             "usuario": self.usuario.to_json(),
-            "rpgs": [rpg.to_json() for rpg in self.rpgs],
+            "rpgs": [rpg.to_json_sem_mestre() for rpg in self.rpgs],
+        }
+    def to_json_sem_rpg(self):
+        return {
+            "id": self.id,
+            "ativo": self.ativo,
+            "usuario": self.usuario.to_json(),
         }

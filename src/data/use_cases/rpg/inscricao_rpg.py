@@ -34,7 +34,7 @@ class InscricaoRPG(InscricaoRPGInterface):
 
     @classmethod
     def desinscrever(self, id_usuario: int, id_rpg: int) -> Dict:
-        rpg: RPG = self.__repository.find_by_id(rpg)
+        rpg: RPG = self.__repository.find_by_id(id_rpg)
         if rpg is None:
             raise HttpError(HttpError.error_404("RPG não encontrado."))
         usuario: Usuario = self.__usuario_repository.find_by_id(id_usuario)

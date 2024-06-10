@@ -25,10 +25,7 @@ class ManterUsuarioController():
             request.body["telefone"],
             request.body["senha"],
             request.body["aniversario"],
-            Cargo(
-                request.body["cargo"]["id"],
-                request.body["cargo"]["descricao"]
-                )
+            [Cargo(id = cargo["id"]) for cargo in request.body["cargos"]]
             )
         response = self.__use_case.cadastrar(form)
 
@@ -54,7 +51,7 @@ class ManterUsuarioController():
             request.body["telefone"],
             None,
             request.body["aniversario"],
-            request.body["cargo"],
+            [Cargo(id = cargo["id"]) for cargo in request.body["cargos"]]
         )
         response = self.__use_case.atualizar(form)
         return HttpResponse (

@@ -1,4 +1,4 @@
-from src.domain.models import Usuario
+from src.domain.models import Usuario, Cargo
 from src.domain.use_cases.usuario import ManterUsuarioInterface
 from src.data.interfaces import UsuarioRepositoryInterface
 from src.errors import HttpError
@@ -28,7 +28,7 @@ class ManterUsuario(ManterUsuarioInterface):
             usuario.telefone,
             encrypt_password(usuario.senha),
             usuario.aniversario,
-            usuario.cargo
+            [Cargo(id=cargo.id) for cargo in usuario.cargos]
             )
         return {
             "usuario": self.__repository.insert(novo_usuario).to_json(),

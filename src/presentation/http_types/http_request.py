@@ -9,6 +9,7 @@ class HttpRequest:
             query_params = None,
             path_params = None,
             url = None,
+            payload = None,
             ipv4 = None
     ) -> None:
         self.headers = headers

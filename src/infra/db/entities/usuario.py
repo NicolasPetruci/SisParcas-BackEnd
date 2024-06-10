@@ -6,6 +6,7 @@ from .cargo import CargoEntity
 from .participante_evento import participante_evento_association
 from .jogador_rpg import jogador_rpg_association
 from .jogador_sessao import jogador_sessao_association
+from .usuario_cargo import usuario_cargo_association
 
 class UsuarioEntity(Base):
 
@@ -18,8 +19,12 @@ class UsuarioEntity(Base):
     senha = Column(String)
     aniversario = Column(Date)
 
-    id_cargo = Column(Integer, ForeignKey("cargo.id"))
-    cargo = relationship("CargoEntity", back_populates="usuarios", lazy="joined")
+    cargos = relationship("CargoEntity", 
+                            secondary = usuario_cargo_association,
+                            back_populates="usuarios",
+                            cascade="all,delete",
+                            lazy="selectin"
+                )
     eventos = relationship("EventoEntity", 
                             secondary = participante_evento_association,
                             back_populates="participantes",

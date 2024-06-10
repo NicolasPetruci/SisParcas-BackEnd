@@ -1,5 +1,6 @@
 from datetime import date
 from .cargo import Cargo
+from typing import List
 
 class Usuario():
 
@@ -11,7 +12,7 @@ class Usuario():
         telefone: str = None,
         senha: str = None,
         aniversario: date = None,
-        cargo: Cargo = None,
+        cargos: List[Cargo] = None,
     ) -> None:
         self.__id = id
         self.__nome = nome
@@ -19,7 +20,7 @@ class Usuario():
         self.__telefone = telefone
         self.__senha = senha
         self.__aniversario = aniversario
-        self.__cargo = cargo
+        self.__cargos = cargos
     
     @property
     def id(self):
@@ -46,8 +47,8 @@ class Usuario():
         return self.__aniversario
 
     @property
-    def cargo(self):
-        return self.__cargo
+    def cargos(self):
+        return self.__cargos
 
     def set_id(self, id: int):
         self.__id = id
@@ -67,8 +68,8 @@ class Usuario():
     def set_aniversario(self, aniversario):
         self.__aniversario = aniversario
 
-    def set_cargo(self, cargo):
-        self.__cargo = cargo
+    def set_cargos(self, cargos):
+        self.__cargos = cargos
 
     @staticmethod
     def from_entity(entity):
@@ -79,7 +80,7 @@ class Usuario():
             entity.telefone, 
             entity.senha, 
             entity.aniversario,
-            Cargo.from_entity(entity=entity.cargo)
+            [Cargo.from_entity(entity=cargo) for cargo in entity.cargos]
         )
     
     @staticmethod
@@ -93,7 +94,7 @@ class Usuario():
             "email": self.email, 
             "telefone": self.telefone,
             "aniversario": self.aniversario,
-            "cargo": self.cargo.to_json()
+            "cargos": [cargo.to_json() for cargo in self.cargos]
         }
 
 class UsuarioLogin():

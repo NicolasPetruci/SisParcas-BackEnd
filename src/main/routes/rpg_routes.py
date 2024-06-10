@@ -2,7 +2,8 @@ from flask import Blueprint, jsonify, request
 
 from src.main.adapters import request_adapter_dono,\
                               request_adapter_adm, \
-                              request_adapter
+                              request_adapter, \
+                              request_adapter_mestre
 
 from src.main.composers.genero import cadastrar_genero_composer,\
                                      buscar_generos_composer,\

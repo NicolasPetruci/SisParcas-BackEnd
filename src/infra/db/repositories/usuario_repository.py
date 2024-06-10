@@ -17,7 +17,7 @@ class UsuarioRepository(UsuarioRepositoryInterface):
                     telefone = usuario.telefone,
                     senha = usuario.senha,
                     aniversario = usuario.aniversario,
-                    cargo = database.session.get(CargoEntity, usuario.cargo.id),
+                    cargos = [database.session.get(CargoEntity, cargo.id) for cargo in usuario.cargos],
                     eventos = []
                 )
                 database.session.add(entity)
@@ -82,7 +82,7 @@ class UsuarioRepository(UsuarioRepositoryInterface):
                 entity.aniversario = usuario.aniversario
                 entity.email = usuario.email
                 entity.telefone = usuario.telefone
-                entity.cargo = database.session.get(CargoEntity, usuario.cargo.id)
+                entity.cargos = [database.session.get(CargoEntity, cargo.id) for cargo in usuario.cargos]
                 database.session.commit()
                 return Usuario.from_entity(entity)
             except Exception as exception:
