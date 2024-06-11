@@ -85,7 +85,7 @@ class Evento():
         self.__participantes.append(participante)
 
     def remover_participante(self, participante):
-        self.__participantes.remove(participante)
+        self.set_participantes([p for p in self.participantes if p.id != participante.id])
 
     @staticmethod
     def from_entity(entity):

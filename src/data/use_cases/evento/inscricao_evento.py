@@ -23,7 +23,7 @@ class InscricaoEvento(InscricaoEventoInterface):
         usuario: Usuario = self.__usuario_repository.find_by_id(id_usuario)
         if usuario is None:
             raise HttpError(HttpError.error_404("Usuario não encontrado."))
-        if usuario in evento.participantes:
+        if usuario.id in [participante.id for participante in evento.participantes]:
             raise HttpError(HttpError.error_400("Participante já inscrito."))
         evento.adicionar_participante(usuario)
         evento_atualizado = self.__repository.update(evento)
@@ -40,7 +40,7 @@ class InscricaoEvento(InscricaoEventoInterface):
         usuario: Usuario = self.__usuario_repository.find_by_id(id_usuario)
         if usuario is None:
             raise HttpError(HttpError.error_404("Usuario não encontrado."))
-        if usuario not in evento.participantes:
+        if usuario.id not in [participante.id for participante in evento.participantes]:
             raise HttpError(HttpError.error_400("Participante não está inscrito."))
         evento.remover_participante(usuario)
         evento_atualizado = self.__repository.update(evento)
