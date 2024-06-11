@@ -34,7 +34,7 @@ class InscricaoEvento(InscricaoEventoInterface):
 
     @classmethod
     def desinscrever(self, id_usuario: int, id_evento: int) -> Dict:
-        evento: Evento = self.__repository.find_by_id(evento)
+        evento: Evento = self.__repository.find_by_id(id_evento)
         if evento is None:
             raise HttpError(HttpError.error_404("Evento não encontrado."))
         usuario: Usuario = self.__usuario_repository.find_by_id(id_usuario)
