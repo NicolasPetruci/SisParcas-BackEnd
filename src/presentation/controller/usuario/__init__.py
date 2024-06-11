@@ -1,3 +1,4 @@
 from .login_controller import LoginController
 from .manter_usuario_controller import ManterUsuarioController
 from .buscar_cargos_usuario import BuscarCargosUsuarioController
+from .buscar_usuario_logado import BuscarUsuarioLogadoController

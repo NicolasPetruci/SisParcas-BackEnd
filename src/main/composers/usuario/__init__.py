@@ -5,3 +5,4 @@ from .manter_usuario_composer import cadastrar_usuario_composer,\
                                      atualizar_usuario_composer, \
                                      excluir_usuario_composer
 from .buscar_cargos_usuario import buscar_cargos_usuario_composer
+from .buscar_usuario_logado import buscar_usuario_logado_composer
