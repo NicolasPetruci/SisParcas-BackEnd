@@ -91,11 +91,14 @@ class SessaoRepository(SessaoRepositoryInterface):
                     entity.numero = sessao.numero
                 if sessao.rpg:
                     entity.rpg = database.session.get(RPGEntity, sessao.rpg.id)
-                if sessao.jogadores:
-                    entity.jogadores = [
-                         database.session.get(UsuarioEntity, usuario.id) 
-                         for usuario in sessao.jogadores
-                    ]
+                entity.jogadores = [
+                    database.session.get(UsuarioEntity, usuario.id) 
+                    for usuario in sessao.jogadores
+                ]
+                if len(entity.jogadores) != 0:
+                    for jogador in entity.jogadores:
+                        if jogador.id not in [p.id for p in sessao.jogadores]:
+                            entity.jogadores.remove(jogador)
                 database.session.commit()
                 return Sessao.from_entity(entity)
             except Exception as exception:
