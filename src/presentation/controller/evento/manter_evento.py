@@ -21,13 +21,13 @@ class ManterEventoController():
     def cadastrar(self, request: HttpRequest) -> HttpResponse:
 
         form = Evento(
-        0,
-        request.body["nome"], 
-        request.body["descricao"],
-        request.body["local"],
-        request.body["online"],
-        request.body["data_hora"], 
-        TipoEvento(request.body["tipo_evento"]["id"], request.body["tipo_evento"]["descricao"])
+            0,
+            request.body["nome"], 
+            request.body["descricao"],
+            request.body["local"],
+            (request.body["online"].upper() == "SIM"),
+            request.body["data_hora"], 
+            TipoEvento(request.body["tipo_evento"]["id"], request.body["tipo_evento"]["descricao"])
         )
         response = self.__use_case.cadastrar(form)
 
@@ -56,6 +56,8 @@ class ManterEventoController():
             form.set_descricao(request.body["descricao"])
         if "local" in request.body:
             form.set_local(request.body["local"])
+        if "online" in request.body:
+            form.set_online(request.body["online"].upper() == "SIM")
         if "data_hora" in request.body:
             form.set_data_hora(request.body["data_hora"])
         if "tipo_evento" in request.body:
