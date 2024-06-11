@@ -82,7 +82,7 @@ class MestreRepository(MestreRepositoryInterface):
             try:
                 entity: MestreEntity = database.session.scalars(
                     select(MestreEntity)
-                    .filter_by(id_usaurio = id_usuario)
+                    .filter_by(id_usuario = id_usuario)
                     .limit(1)
                 ).first()
                 if entity is None:

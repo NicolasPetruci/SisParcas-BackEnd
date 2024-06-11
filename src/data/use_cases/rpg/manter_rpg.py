@@ -1,4 +1,4 @@
-from src.domain.models import RPG
+from src.domain.models import RPG, Mestre
 from src.domain.use_cases.rpg import ManterRPGInterface
 from src.data.interfaces import RPGRepositoryInterface, MestreRepositoryInterface
 from src.errors import HttpError
@@ -20,7 +20,9 @@ class ManterRPG(ManterRPGInterface):
 
     @classmethod
     def cadastrar(self, rpg: RPG)->Dict:
-        mestre = self.__mestre_repository.find_by_id_usuario(rpg.mestre.id)
+        mestre = self.__mestre_repository.find_by_id_usuario(rpg.mestre.usuario.id)
+        if not mestre:
+            mestre = self.__mestre_repository.insert(Mestre(ativo=True, usuario=rpg.mestre.usuario.id))
         novo_rpg: RPG = RPG(
             None, 
             rpg.nome,

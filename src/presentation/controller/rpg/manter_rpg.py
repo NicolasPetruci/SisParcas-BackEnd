@@ -1,5 +1,5 @@
 from src.domain.use_cases.rpg import ManterRPGInterface
-from src.domain.models import RPG, Genero, Mestre
+from src.domain.models import RPG, Genero, Mestre, Usuario
 from src.presentation.http_types import HttpRequest, HttpResponse
 
 class ManterRPGController():
