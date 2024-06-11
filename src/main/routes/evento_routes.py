@@ -130,3 +130,15 @@ def listar_participantes_evento():
         http_response = handle_errors(exception)
 
     return jsonify(http_response.body), http_response.status_code
+
+
+@blueprint.route("/evento/visualizar-eventos", methods=["GET"])
+@cross_origin()
+def visualizar_eventos_evento():
+    http_response = None
+    try:
+        http_response = request_adapter(request, visualizar_eventos_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code

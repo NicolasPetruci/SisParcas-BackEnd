@@ -1,3 +1,4 @@
 from .manter_evento import ManterEventoInterface
 from .inscricao_evento import InscricaoEventoInterface
 from .listar_participantes import ListarParticipantesInterface
+from .visualizar_eventos import VisualizarEventosInterface

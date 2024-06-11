@@ -1,3 +1,4 @@
 from .manter_evento import ManterEventoController
 from .inscricao_evento import InscricaoEventoController
 from .listar_participantes import ListarParticipantesController
+from .visualizar_eventos import VisualizarEventosController

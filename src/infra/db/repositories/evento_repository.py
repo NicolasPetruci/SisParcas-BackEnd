@@ -4,7 +4,7 @@ from src.infra.db.config import DBConnectionHandler
 from src.data.interfaces import EventoRepositoryInterface
 from sqlalchemy import select
 from typing import List
-
+from datetime import datetime
 class EventoRepository(EventoRepositoryInterface):
 
     @classmethod
@@ -98,6 +98,23 @@ class EventoRepository(EventoRepositoryInterface):
                     ]
                 database.session.commit()
                 return Evento.from_entity(entity)
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
+
+    @classmethod
+    def find_all_between_dates(cls, data_inicial: datetime, data_final: datetime) -> List[Evento]:
+        with DBConnectionHandler() as database:
+            try:
+                eventos = (
+                    Evento.from_entity(entity)
+                    for entity in 
+                    database.session.scalars(
+                                select(EventoEntity)
+                                .filter(EventoEntity.data_hora.between(data_inicial, data_final))
+                            ).all()
+                )
+                return eventos
             except Exception as exception:
                 database.session.rollback()
                 raise exception
