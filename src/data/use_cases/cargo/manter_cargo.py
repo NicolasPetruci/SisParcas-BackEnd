@@ -30,7 +30,7 @@ class ManterCargo(ManterCargoInterface):
     @classmethod
     def buscar_cargos(self) -> List[Dict]:
         cargos: List[Cargo] = self.__repository.find_all()
-        return cargos
+        return [cargo.to_json() for cargo in cargos]
     
     @classmethod
     def atualizar(self, cargo: Cargo) -> Dict:
