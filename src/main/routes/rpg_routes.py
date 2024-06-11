@@ -11,13 +11,7 @@ from src.main.composers.genero import cadastrar_genero_composer,\
                                      atualizar_genero_composer, \
                                      excluir_genero_composer
 
-from src.main.composers.rpg import cadastrar_rpg_composer,\
-                                     buscar_rpgs_composer,\
-                                     buscar_rpg_por_id_composer,\
-                                     atualizar_rpg_composer, \
-                                     excluir_rpg_composer, \
-                                     inscrever_composer, \
-                                     desinscrever_composer
+from src.main.composers.rpg import *
 
 from src.main.composers.mestre import cadastrar_mestre_composer,\
                                         buscar_mestres_composer, \
@@ -256,3 +250,26 @@ def excluir_sessao():
         http_response = handle_errors(exception)
 
     return jsonify(http_response.body), http_response.status_code   
+
+@blueprint.route("/rpg/listar-jogadores", methods=["GET"])
+@cross_origin()
+def listar_jogadores_rpg():
+    http_response = None
+    try:
+        http_response = request_adapter(request, listar_jogadores_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code
+
+
+@blueprint.route("/rpg/visualizar-rpgs", methods=["GET"])
+@cross_origin()
+def visualizar_rpgs():
+    http_response = None
+    try:
+        http_response = request_adapter(request, visualizar_rpgs_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code

@@ -1,2 +1,4 @@
 from .manter_rpg import ManterRPGController
 from .inscricao_rpg import InscricaoRPGController
+from .listar_jogadores import ListarJogadoresController
+from .visualizar_rpgs import VisualizarRPGsController

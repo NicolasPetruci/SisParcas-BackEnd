@@ -134,7 +134,7 @@ def listar_participantes_evento():
 
 @blueprint.route("/evento/visualizar-eventos", methods=["GET"])
 @cross_origin()
-def visualizar_eventos_evento():
+def visualizar_eventos():
     http_response = None
     try:
         http_response = request_adapter(request, visualizar_eventos_composer())

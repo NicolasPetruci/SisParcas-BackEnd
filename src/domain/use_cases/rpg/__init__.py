@@ -1,2 +1,4 @@
 from .manter_rpg import ManterRPGInterface
 from .inscricao_rpg import InscricaoRPGInterface
+from .listar_jogadores import ListarJogadoresInterface
+from .visualizar_rpgs import VisualizarRPGsInterface
