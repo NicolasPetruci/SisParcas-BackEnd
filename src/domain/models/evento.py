@@ -106,6 +106,7 @@ class Evento():
             "nome": self.nome,
             "descricao": self.descricao, 
             "local": self.local,
+            "online": "Sim" if self.local else "Não",
             "data_hora": self.data_hora,
             "tipo_evento": self.tipo_evento.to_json() if self.tipo_evento else None,
             "participantes": [p.to_json() for p in self.participantes]
