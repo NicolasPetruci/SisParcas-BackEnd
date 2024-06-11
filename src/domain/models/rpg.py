@@ -63,7 +63,7 @@ class RPG:
     
 
     def remover_jogador(self, jogador):
-        self.__jogadores.remove(jogador)
+        self.set_jogadors([p for p in self.jogadors if p.id != jogador.id])
 
 
     @staticmethod

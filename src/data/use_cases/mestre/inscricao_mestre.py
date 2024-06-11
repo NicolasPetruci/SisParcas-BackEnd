@@ -40,7 +40,7 @@ class InscricaoMestre(InscricaoMestreInterface):
         if not mestre.ativo:
             raise HttpError(HttpError.error_400("Inscrição já foi indeferida."))
         usuario: Usuario = self.__usuario_repository.find_by_id(mestre.usuario.id)
-        usuario.cargos.remove(Cargo(id = 3))
+        usuario.set_cargos([c for c in usuario.cargos if c.descricao != "MESTRE"])
         self.__usuario_repository.update(usuario)
         mestre.set_ativo(False)
         mestre_atualizado = self.__repository.update(mestre)
