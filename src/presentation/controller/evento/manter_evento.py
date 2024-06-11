@@ -1,6 +1,7 @@
 from src.domain.use_cases.evento import ManterEventoInterface
 from src.domain.models import Evento, TipoEvento
 from src.presentation.http_types import HttpRequest, HttpResponse
+from src.errors import HttpError
 
 class ManterEventoController():
 
