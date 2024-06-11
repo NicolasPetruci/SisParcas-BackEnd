@@ -4,19 +4,10 @@ from src.main.adapters import request_adapter_dono,\
                               request_adapter_adm, \
                               request_adapter
 
-from src.main.composers.tipo_evento import cadastrar_tipo_evento_composer,\
-                                     buscar_tipo_eventos_composer,\
-                                     buscar_tipo_evento_por_id_composer,\
-                                     atualizar_tipo_evento_composer, \
-                                     excluir_tipo_evento_composer
+from src.main.composers.tipo_evento import *
 
-from src.main.composers.evento import cadastrar_evento_composer,\
-                                     buscar_eventos_composer,\
-                                     buscar_evento_por_id_composer,\
-                                     atualizar_evento_composer, \
-                                     excluir_evento_composer, \
-                                     inscrever_composer, \
-                                     desinscrever_composer
+from src.main.composers.evento import *
+
 from flask_cors import cross_origin
 from src.errors import handle_errors
 
@@ -124,6 +115,17 @@ def desinscrever_evento():
     http_response = None
     try:
         http_response = request_adapter(request, desinscrever_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code
+
+@blueprint.route("/evento/listar-participantes", methods=["GET"])
+@cross_origin()
+def listar_participantes_evento():
+    http_response = None
+    try:
+        http_response = request_adapter(request, listar_participantes_composer())
     except Exception as exception:
         http_response = handle_errors(exception)
 

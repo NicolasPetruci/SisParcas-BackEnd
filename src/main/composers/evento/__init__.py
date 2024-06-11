@@ -6,3 +6,5 @@ from .manter_evento_composer import cadastrar_evento_composer,\
 
 from .inscricao_evento_composer import inscrever_composer, \
                                        desinscrever_composer
+
+from .listar_participantes_composer import listar_participantes_composer
