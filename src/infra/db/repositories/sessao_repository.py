@@ -34,14 +34,14 @@ class SessaoRepository(SessaoRepositoryInterface):
     def find_all(cls)->List[Sessao]:
         with DBConnectionHandler() as database:
             try:
-                sessaos = (
+                sessoes = (
                     Sessao.from_entity(entity)
                     for entity in 
                     database.session.scalars(
                                 select(SessaoEntity)
                             ).all()
                 )
-                return sessaos
+                return sessoes
             except Exception as exception:
                 database.session.rollback()
                 raise exception

@@ -69,25 +69,25 @@ class Sessao:
     @staticmethod
     def from_entity(entity):
         return Sessao(
-            id,
-            nome,
-            descricao,
-            data_hora,
-            temporada,
-            numero,
-            rpg,
-            jogadores,            
+            entity.id,
+            entity.nome,
+            entity.descricao,
+            entity.data_hora,
+            entity.temporada,
+            entity.numero,
+            RPG.from_entity(entity.rpg),
+            [Usuario.from_entity(jogador) for jogador in entity.jogadores],
         )
 
     def to_json(self):
         return {
-            "id": self.__id,
-            "nome": self.__nome,
-            "descricao": self.__descricao,
-            "data_hora": self.__data_hora,
-            "temporada": self.__temporada,
-            "numero": self.__numero,
-            "rpg": self.__rpg,
-            "jogadores": self.__jogadores,
+            "id": self.id,
+            "nome": self.nome,
+            "descricao": self.descricao,
+            "data_hora": self.data_hora,
+            "temporada": self.temporada,
+            "numero": self.numero,
+            "rpg": self.rpg.to_json(),
+            "jogadores": [jogador.to_json() for jogador in self.jogadores],
         }
             

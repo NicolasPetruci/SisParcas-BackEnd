@@ -10,7 +10,7 @@ class ManterSessaoController():
     
     @classmethod
     def buscar(self, request: HttpRequest) -> HttpResponse: 
-        response = self.__use_case.buscar_sessaos()
+        response = self.__use_case.buscar_sessoes()
         return HttpResponse(
             status_code=200,
             body = response

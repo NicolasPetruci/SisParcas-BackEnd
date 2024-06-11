@@ -1,10 +1,11 @@
 from src.data.use_cases.rpg import ManterRPG
-from src.infra.db.repositories import RPGRepository
+from src.infra.db.repositories import RPGRepository, MestreRepository
 from src.presentation.controller.rpg import ManterRPGController
 
 def compose_methods():
     repository = RPGRepository()
-    use_case = ManterRPG(repository)
+    mestre_repository = MestreRepository()
+    use_case = ManterRPG(repository, mestre_repository)
     controller = ManterRPGController(use_case)
 
     return controller
