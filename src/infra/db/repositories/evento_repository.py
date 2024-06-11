@@ -91,11 +91,14 @@ class EventoRepository(EventoRepositoryInterface):
                     entity.online = evento.online
                 if evento.tipo_evento:
                     entity.tipo_evento = database.session.get(TipoEventoEntity, evento.tipo_evento.id)
-                if evento.participantes:
-                    entity.participantes = [
-                         database.session.get(UsuarioEntity, usuario.id) 
-                         for usuario in evento.participantes
-                    ]
+                entity.participantes = [
+                    database.session.get(UsuarioEntity, usuario.id) 
+                    for usuario in evento.participantes
+                ]
+                if len(entity.participantes) != 0:
+                    for participante in entity.participantes:
+                        if participante.id not in [p.id for p in evento.participantes]:
+                            entity.participantes.remove(participante)
                 database.session.commit()
                 return Evento.from_entity(entity)
             except Exception as exception:

@@ -88,16 +88,22 @@ class RPGRepository(RPGRepositoryInterface):
                     entity.descricao = rpg.descricao
                 if rpg.mestre:
                     entity.mestre = database.session.get(MestreEntity, rpg.mestre.id)
-                if rpg.jogadores:
-                    entity.jogadores = [
-                         database.session.get(UsuarioEntity, usuario.id) 
-                         for usuario in rpg.jogadores
-                    ]
-                if rpg.generos:
-                    entity.generos = [
-                         database.session.get(GeneroEntity, genero.id) 
-                         for genero in rpg.generos
-                    ]
+                entity.jogadores = [
+                    database.session.get(UsuarioEntity, usuario.id) 
+                    for usuario in rpg.jogadores
+                ]
+                if len(entity.jogadores) != 0:
+                    for jogador in entity.jogadores:
+                        if jogador.id not in [j.id for j in rpg.jogadores]:
+                            entity.jogadores.remove(jogador)
+                entity.generos = [
+                    database.session.get(UsuarioEntity, usuario.id) 
+                    for usuario in rpg.generos
+                ]
+                if len(entity.generos) != 0:
+                    for genero in entity.generos:
+                        if genero.id not in [g.id for g in rpg.generos]:
+                            entity.generos.remove(genero)
                 database.session.commit()
                 return RPG.from_entity(entity)
             except Exception as exception:

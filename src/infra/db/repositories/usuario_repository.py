@@ -82,7 +82,14 @@ class UsuarioRepository(UsuarioRepositoryInterface):
                 entity.aniversario = usuario.aniversario
                 entity.email = usuario.email
                 entity.telefone = usuario.telefone
-                entity.cargos = [database.session.get(CargoEntity, cargo.id) for cargo in usuario.cargos]
+                entity.cargos = [
+                    database.session.get(UsuarioEntity, usuario.id) 
+                    for usuario in usuario.cargos
+                ]
+                if len(entity.cargos) != 0:
+                    for cargo in entity.cargos:
+                        if cargo.id not in [p.id for p in usuario.cargos]:
+                            entity.cargos.remove(cargo)
                 database.session.commit()
                 return Usuario.from_entity(entity)
             except Exception as exception:
