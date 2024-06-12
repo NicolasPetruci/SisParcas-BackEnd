@@ -87,7 +87,6 @@ class Sessao:
             "data_hora": self.data_hora,
             "temporada": self.temporada,
             "numero": self.numero,
-            "rpg": self.rpg.to_json(),
             "jogadores": [jogador.to_json() for jogador in self.jogadores],
         }
             
