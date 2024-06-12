@@ -22,7 +22,6 @@ class UsuarioEntity(Base):
     cargos = relationship("CargoEntity", 
                             secondary = usuario_cargo_association,
                             back_populates="usuarios",
-                            cascade="all,delete",
                             lazy="selectin"
                 )
     eventos = relationship("EventoEntity", 

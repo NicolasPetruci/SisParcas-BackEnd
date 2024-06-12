@@ -26,7 +26,6 @@ class RPGEntity(Base):
                             "GeneroEntity", 
                             secondary = genero_rpg_association,
                             back_populates="rpgs",
-                            cascade="all,delete",
                             lazy="selectin"
                     )
     sessoes = relationship("SessaoEntity", 
