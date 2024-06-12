@@ -1,1 +1,2 @@
 from .manter_sessao import ManterSessaoController
+from .buscar_sessoes_rpg import BuscarSessoesRPGController

@@ -1,1 +1,2 @@
 from .manter_sessao import ManterSessaoInterface
+from .buscar_sessoes_rpg import BuscarSessoesRPGInterface

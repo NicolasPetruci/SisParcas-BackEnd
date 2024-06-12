@@ -28,7 +28,7 @@ class VisualizarEventos(VisualizarEventosInterface):
             "nome": evento.nome,
             "local": evento.local,
             "tipo_evento": evento.tipo_evento.descricao,
-            "data": evento.data_hora,
+            "data": f"{evento.data_hora.day}/{evento.data_hora.month}/{evento.data_hora.year}, {evento.data_hora.hour:02}:{evento.data_hora.minute:02}",
             "presencial": "Não" if evento.online else "Sim",
             "numero_inscritos": len(evento.participantes) 
         }

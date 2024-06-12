@@ -115,6 +115,7 @@ class EventoRepository(EventoRepositoryInterface):
                     database.session.scalars(
                                 select(EventoEntity)
                                 .filter(EventoEntity.data_hora.between(data_inicial, data_final))
+                                .order_by(EventoEntity.data_hora)
                             ).all()
                 )
                 return eventos

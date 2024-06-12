@@ -229,6 +229,17 @@ def buscar_sessoes():
         
     return jsonify(http_response.body), http_response.status_code
 
+@blueprint.route("/rpg/sessao/buscar", methods=["GET"])
+@cross_origin()
+def buscar_sessoes_por_id_rpg():
+    http_response = None
+    try:
+        http_response = request_adapter(request, buscar_por_id_rpg_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+        
+    return jsonify(http_response.body), http_response.status_code
+
 @blueprint.route("/rpg/sessao/atualizar", methods=["PUT"])
 @cross_origin()
 def atualizar_sessao():

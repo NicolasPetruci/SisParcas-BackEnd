@@ -104,3 +104,21 @@ class SessaoRepository(SessaoRepositoryInterface):
             except Exception as exception:
                 database.session.rollback()
                 raise exception
+    
+
+    @classmethod
+    def find_all_by_id_rpg(cls, id_rpg: int): 
+         with DBConnectionHandler() as database:
+            try:
+                sessoes = (
+                    Sessao.from_entity(entity)
+                    for entity in 
+                    database.session.scalars(
+                                select(SessaoEntity)
+                                .filter(SessaoEntity.id_rpg == id_rpg)
+                            ).all()
+                )
+                return sessoes
+            except Exception as exception:
+                database.session.rollback()
+                raise exception
