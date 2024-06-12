@@ -13,19 +13,9 @@ from src.main.composers.genero import cadastrar_genero_composer,\
 
 from src.main.composers.rpg import *
 
-from src.main.composers.mestre import cadastrar_mestre_composer,\
-                                        buscar_mestres_composer, \
-                                        atualizar_mestre_composer, \
-                                        buscar_mestre_por_id_composer, \
-                                        excluir_mestre_composer, \
-                                        deferir_mestre_composer, \
-                                        indeferir_mestre_composer
+from src.main.composers.mestre import *
 
-from src.main.composers.sessao import cadastrar_sessao_composer,\
-                                     buscar_sessoes_composer,\
-                                     buscar_sessao_por_id_composer,\
-                                     atualizar_sessao_composer, \
-                                     excluir_sessao_composer
+from src.main.composers.sessao import *
 
 from flask_cors import cross_origin
 from src.errors import handle_errors
@@ -79,6 +69,17 @@ def buscar_mestres():
             http_response = request_adapter(request, buscar_mestre_por_id_composer())
         else:
             http_response = request_adapter(request, buscar_mestres_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+        
+    return jsonify(http_response.body), http_response.status_code
+
+@blueprint.route("/rpg/mestre-logado", methods=["GET"])
+@cross_origin()
+def buscar_mestre_logado():
+    http_response = None
+    try:
+        http_response = request_adapter(request, buscar_mestre_logado_composer())
     except Exception as exception:
         http_response = handle_errors(exception)
         

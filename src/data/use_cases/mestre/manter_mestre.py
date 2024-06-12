@@ -1,4 +1,4 @@
-from src.domain.models import Mestre
+from src.domain.models import Mestre, Cargo, Usuario
 from src.domain.use_cases.mestre import ManterMestreInterface
 from src.data.interfaces import MestreRepositoryInterface
 from src.errors import HttpError
@@ -17,6 +17,15 @@ class ManterMestre(ManterMestreInterface):
         mestre = self.__repository.find_by_id(id)
         if mestre is None:
             raise HttpError(HttpError.error_404("Mestre não encontrado."))
+        return mestre.to_json()
+
+    @classmethod
+    def buscar_mestre_por_id_usuario(self, id_usuario: int, cargos: List[Cargo]) -> Dict:
+        mestre = self.__repository.find_by_id_usuario(id_usuario)
+        if not mestre:
+            if "MESTRE" not in cargos:
+                raise HttpError(HttpError.error_401("Requisição requer cargo de mestre."))
+            mestre = self.__repository.insert(Mestre(ativo=True, usuario=Usuario(id=request.payload.id)))
         return mestre.to_json()
 
     @classmethod

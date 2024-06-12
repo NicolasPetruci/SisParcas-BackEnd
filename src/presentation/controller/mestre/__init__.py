@@ -1,2 +1,3 @@
 from .inscricao_mestre import InscricaoMestreController
 from .manter_mestre import ManterMestreController
+from .buscar_mestre_logado import BuscarMestreLogadoController

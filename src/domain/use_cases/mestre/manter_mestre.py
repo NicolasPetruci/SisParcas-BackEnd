@@ -5,7 +5,10 @@ from typing import List, Dict
 class ManterMestreInterface(ABC):
 
     @abstractmethod
-    def buscar_mestre_por_id(self, id: int) -> List[Dict]: pass
+    def buscar_mestre_por_id(self, id: int) -> Dict: pass
+
+    @abstractmethod
+    def buscar_mestre_por_id_usuario(self, id: int) -> Dict: pass
 
     @abstractmethod
     def buscar_mestres(self) -> List[Dict]: pass
