@@ -44,6 +44,7 @@ class ManterRPGController():
     @classmethod
     def atualizar(self, request: HttpRequest) -> HttpResponse: 
         form = RPG()
+        print(request.body)
         if("id" not in request.body):
             raise HttpError(HttpError.error_400("O campo 'id' é obrigatório."))
         form.set_id(request.body["id"])
@@ -53,10 +54,7 @@ class ManterRPGController():
             form.set_descricao(request.body["descricao"])
         if "generos" in request.body:
             form.set_generos(
-                Genero(
-                    request.body["generos"]["id"],
-                    request.body["generos"]["descricao"],
-                )
+                [Genero(genero["id"], genero["descricao"]) for genero in request.body["generos"]]
             )
         response = self.__use_case.atualizar(form)
         return HttpResponse (

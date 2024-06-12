@@ -47,6 +47,29 @@ def buscar_usuarios():
     
     return jsonify(http_response.body), http_response.status_code
 
+blueprint.route("/usuario/atualizar", methods=["PUT"])
+@cross_origin()
+def atualizar_usuario():
+    http_response = None
+
+    try:
+        http_response = request_adapter_dono(request, atualizar_usuario_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code
+
+blueprint.route("/usuario/excluir", methods=["DELETE"])
+@cross_origin()
+def excluir_usuario():
+    http_response = None
+
+    try:
+        http_response = request_adapter_dono(request, excluir_usuario_composer())
+    except Exception as exception:
+        http_response = handle_errors(exception)
+
+    return jsonify(http_response.body), http_response.status_code
 
 @blueprint.route("/usuario/cargos", methods=["GET"])
 @cross_origin()

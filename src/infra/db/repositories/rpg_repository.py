@@ -97,8 +97,8 @@ class RPGRepository(RPGRepositoryInterface):
                         if jogador.id not in [j.id for j in rpg.jogadores]:
                             entity.jogadores.remove(jogador)
                 entity.generos = [
-                    database.session.get(UsuarioEntity, usuario.id) 
-                    for usuario in rpg.generos
+                    database.session.get(GeneroEntity, genero.id) 
+                    for genero in rpg.generos
                 ]
                 if len(entity.generos) != 0:
                     for genero in entity.generos:

@@ -11,6 +11,5 @@ class CargoEntity(Base):
     descricao = Column(String)
 
     usuarios = relationship("UsuarioEntity",
-                            cascade="all,delete",
                             secondary=usuario_cargo_association,
                             back_populates="cargos")
